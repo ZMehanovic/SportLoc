@@ -1,5 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>SportLoc</h2>
+<h3>Current options: -login</h3>
 </body>
 </html>

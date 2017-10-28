@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -9,19 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(
-        name = "MyServlet",
-        urlPatterns = {"/login"}
-    )
+import org.json.JSONObject;
+
+import controller.UserController;
+
+//import com.heroku.sdk.jdbc.DatabaseUrl;
+
+@WebServlet(name = "MyServlet", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        ServletOutputStream out = resp.getOutputStream();
-        out.write("SportLoc".getBytes());
-        out.flush();
-        out.close();
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		JSONObject result=new JSONObject();
+		Map<String, String[]> params= req.getParameterMap();
+		UserController user=new UserController();
+		result.put("loginSuccessful", user.checkLoginData(params.get("username")[0], params.get("password")[0]));
+
+		resp.setContentType("application/json");
+		ServletOutputStream out = resp.getOutputStream();
+		out.write(result.toString().getBytes());
+		out.flush();
+		out.close();
+	}
 
 }
