@@ -22,7 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         txtUsername = (EditText) findViewById(R.id.txtUsername);
