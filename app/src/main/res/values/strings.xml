@@ -5,6 +5,12 @@
     <string name="btn_facebook">FACEBOOK</string>
     <string name="btn_google">GOOGLE</string>
     <string name="btn_login">PRIJAVA</string>
+    <string name="toast_empty_pass">Polje za unos lozinke ne smije biti prazno!</string>
+    <string name="toast_empty_user">Polje za unos korisničkog imena ne smije biti prazno!</string>
+    <string name="toast_empty_user_pass">Polja za unos korisničkog imena i lozinke ne smiju biti prazna!</string>
+    <string name="toast_login_error">Pojavila se nepoznata pogreška prilikom prijave!</string>
+    <string name="toast_login_fail">Unijeli ste pogrešno korisničko ime ili lozinku!</string>
+    <string name="toast_login_success">Prijava uspješna</string>
     <string name="tv_forg_pass">Zaboravljena lozinka?</string>
     <string name="tv_login">PRIJAVA:</string>
     <string name="tv_register">Registrirajte se</string>
