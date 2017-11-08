@@ -22,12 +22,20 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        initializeValues();
+        createDesign();
+    }
+
+    public void initializeValues() {
         tvLogin = (TextView) findViewById(R.id.tvLogin);
         btnAccount = (Button) findViewById(R.id.btnAccount);
         btnAccount.setOnClickListener(openLoginActivity);
         btnFacebook = (Button) findViewById(R.id.btnFacebook);
         btnGoogle = (Button) findViewById(R.id.btnGoogle);
+    }
+
+    public void createDesign() {
+        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         tvLogin.setTypeface(tfRobotoBold);
         btnAccount.setTypeface(tfRobotoBold);
         btnFacebook.setTypeface(tfRobotoBold);

@@ -34,20 +34,28 @@ public class LoginActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        initializeValues();
+        createDesign();
+        intent = getIntent();
+    }
+
+    public void initializeValues() {
         txtUsername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(loginUser);
         tvForgPass = (TextView) findViewById(R.id.tvForgPass);
         tvRegister = (TextView) findViewById(R.id.tvRegister);
+    }
+
+    public void createDesign() {
+        tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         txtUsername.setTypeface(tfRoboto);
         txtPassword.setTypeface(tfRoboto);
         btnLogin.setTypeface(tfRobotoBold);
         tvForgPass.setTypeface(tfRoboto);
         tvRegister.setTypeface(tfRoboto);
-        intent = getIntent();
     }
 
     View.OnClickListener loginUser = new View.OnClickListener() {
@@ -63,14 +71,14 @@ public class LoginActivity extends AppCompatActivity {
     public boolean checkFieldsEmpty(String username, String password) {
         boolean success = false;
         String errorMsg = "";
-        if(username.equals("") && !password.equals("")) {
+        if(username.trim().isEmpty() && password.trim().isEmpty()) {
+            errorMsg = getString(R.string.toast_empty_user_pass);
+        }
+        else if(username.trim().isEmpty()) {
             errorMsg = getString(R.string.toast_empty_user);
         }
-        else if(!username.equals("") && password.equals("")) {
+        else if(password.trim().isEmpty()) {
             errorMsg = getString(R.string.toast_empty_pass);
-        }
-        else if(username.equals("") && password.equals("")) {
-            errorMsg = getString(R.string.toast_empty_user_pass);
         }
         else {
             success = true;
