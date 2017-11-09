@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -14,9 +13,7 @@ import org.json.JSONObject;
 
 import controller.UserController;
 
-//import com.heroku.sdk.jdbc.DatabaseUrl;
-
-@WebServlet(name = "MyServlet", urlPatterns = { "/login" })
+@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 
 	/**
@@ -24,13 +21,15 @@ public class LoginServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		JSONObject result=new JSONObject();
-		Map<String, String[]> params= req.getParameterMap();
-		UserController user=new UserController();
-		result.put("loginSuccessful", user.checkLoginData(params.get("username")[0], params.get("password")[0]));
+		JSONObject result = new JSONObject();
+		UserController user = new UserController();
+		boolean responseValue = false;
+		if (!req.getParameterMap().isEmpty()) {
+			responseValue = user.checkLoginData(req.getParameterMap());
+		}
+		result.put("loginSuccessful", responseValue);
 
 		resp.setContentType("application/json");
 		ServletOutputStream out = resp.getOutputStream();

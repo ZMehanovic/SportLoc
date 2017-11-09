@@ -1,41 +1,60 @@
 package model;
 
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbManager {
+	
+	private static Connection con;
+	
+	
+	
+	private static Connection getConnection() {
+		String dbUrl = System.getenv("JDBC_DATABASE_URL");
+		try {
+			return DriverManager.getConnection(dbUrl);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public DbManager() {
+		con=getConnection();
+	}
 
 	public ResultSet getLoginData(String username) {
 		ResultSet result = null;
 		try {
-			Connection con = getConnection();
 
-			result = con.createStatement()
+			result = getConnection().createStatement()
 					.executeQuery("SELECT lozinka, sol FROM korisnik WHERE kor_ime='" + username + "'");
-		} catch (URISyntaxException | SQLException e) {
+			con.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-
-	private static Connection getConnection() throws URISyntaxException, SQLException {
-		String dbUrl = System.getenv("JDBC_DATABASE_URL");
-		return DriverManager.getConnection(dbUrl);
+	
+	public boolean addUser() {
+		boolean result=false;
+		
+		
+		return result;
 	}
 
 	public boolean updatePassword(String salt, String hash, String username) {
 		boolean result = false;
 
-		String query = "UPDATE korisnik SET sol = '" + salt + "', lozinka = '" + hash + "'\r\n"
-						+ "WHERE kor_ime='" + username + "';";
+		String query = "UPDATE korisnik SET sol = '" + salt + "', lozinka = '" + hash + "'\r\n" + "WHERE kor_ime='"
+				+ username + "';";
 		try {
-			Connection con = getConnection();
 			con.createStatement().executeUpdate(query);
+			con.close();
 			result = true;
-		} catch (URISyntaxException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;

@@ -17,13 +17,26 @@ public class UserBean implements Serializable{
 	private String email;
 	private String sex;
 	private String description;
-	
 	public UserBean() {
 		
 	}
 
+	public UserBean(int userId, int age, String firstName, String lastName, String userName, String email, String sex,
+			String description) {
+		super();
+		this.userId = userId;
+		this.age = age;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.email = email;
+		this.sex = sex;
+		this.description = description;
+	}
+
 	public int getUserId() {
 		return userId;
+		
 	}
 
 	public void setUserId(int userId) {
