@@ -1,11 +1,12 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Map;
 
 import beans.UserBean;
+import helper.MailSender;
 import helper.Passwords;
 import model.DbManager;
 
@@ -16,10 +17,17 @@ public class UserController {
 	}
 
 	public boolean checkLoginData(Map<String, String[]> params) {
-		String username = params.get("username")[0];
-		String password = params.get("password")[0];
+		boolean result;
+		if (params != null && !params.isEmpty() && params.containsKey("username") && params.containsKey("password")) {
+			result = false;
+		}
+		result = checkLoginData(params.get("username")[0], params.get("password")[0]);
+		return result;
+	}
 
+	public boolean checkLoginData(String username, String password) {
 		boolean result = false;
+
 		ResultSet data = new DbManager().getLoginData(username);
 		if (data != null) {
 			String salt = null;
@@ -40,21 +48,26 @@ public class UserController {
 		return result;
 	}
 
+	@SuppressWarnings("unused")
 	private boolean updatePassword(String username, String password) {
 		boolean result = false;
-		try {
-			String salt = "";
-			byte[] saltArray = Passwords.getNextSalt();
-			salt = new String(saltArray, "UTF-16");
-			result = new DbManager().updatePassword(salt, Passwords.getSecurePassword(password, salt), username);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		String salt = Passwords.getNextSalt();
+		result = new DbManager().updatePassword(salt, Passwords.getSecurePassword(password, salt), username);
 		return result;
 	}
 
 	public boolean registerUser(UserBean user) {
-		return false;
+		boolean result = false;
+		user.setSalt(Passwords.getNextSalt());
+		user.setPassword(Passwords.getSecurePassword(user.getPassword(), user.getSalt()));
+		if (user.getImage() != null) {
+			user.setImage(new String(Base64.getDecoder().decode(user.getImage())));
+		}
+		result = new DbManager().insertUser(user);
+		if (user.getEmail() != null) {
+			new MailSender().sendEmail(user.getEmail());
+		}
+		return result;
 
 	}
 }

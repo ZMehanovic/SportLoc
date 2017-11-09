@@ -18,17 +18,24 @@ public class Passwords {
 	 *
 	 * @return a 16 bytes random salt
 	 */
-	public static byte[] getNextSalt() {
+	public static String getNextSalt() {
+		String result = null;
 		byte[] salt = new byte[16];
 		RANDOM.nextBytes(salt);
-		return salt;
+		try {
+			result = new String(salt, "UTF-16");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public static String getSecurePassword(String passwordToHash, String salt) {
 		String generatedPassword = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
-			md.update(salt.getBytes("UTF-8"));
+			md.update(salt.getBytes("UTF-16"));
 			byte[] bytes;
 			bytes = md.digest(passwordToHash.getBytes("UTF-16"));
 

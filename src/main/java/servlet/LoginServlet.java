@@ -5,16 +5,16 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
 import controller.UserController;
+import helper.HttpServletHelper;
 
 @WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServletHelper {
 
 	/**
 	 * 
@@ -26,9 +26,8 @@ public class LoginServlet extends HttpServlet {
 		JSONObject result = new JSONObject();
 		UserController user = new UserController();
 		boolean responseValue = false;
-		if (!req.getParameterMap().isEmpty()) {
-			responseValue = user.checkLoginData(req.getParameterMap());
-		}
+		responseValue = user.checkLoginData(req.getParameterMap());
+
 		result.put("loginSuccessful", responseValue);
 
 		resp.setContentType("application/json");

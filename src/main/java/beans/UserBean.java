@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class UserBean implements Serializable{
+public class UserBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -10,19 +10,23 @@ public class UserBean implements Serializable{
 
 	private int userId;
 	private int age;
-	
+
 	private String firstName;
 	private String lastName;
 	private String userName;
 	private String email;
 	private String sex;
 	private String description;
+	private String password;
+	private String salt;
+	private String image;
+
 	public UserBean() {
-		
+
 	}
 
 	public UserBean(int userId, int age, String firstName, String lastName, String userName, String email, String sex,
-			String description) {
+			String description, String password, String salt, String image) {
 		super();
 		this.userId = userId;
 		this.age = age;
@@ -32,11 +36,14 @@ public class UserBean implements Serializable{
 		this.email = email;
 		this.sex = sex;
 		this.description = description;
+		this.password = password;
+		this.salt = salt;
+		this.image = image;
 	}
 
 	public int getUserId() {
 		return userId;
-		
+
 	}
 
 	public void setUserId(int userId) {
@@ -98,5 +105,29 @@ public class UserBean implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 }
