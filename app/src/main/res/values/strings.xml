@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_logo">Logo aplikacije</string>
+    <string name="app_name">SportLoc</string>
+    <string name="btn_account">VAŠ RAČUN</string>
+    <string name="btn_facebook">FACEBOOK</string>
+    <string name="btn_google">GOOGLE</string>
+    <string name="btn_login">PRIJAVA</string>
+    <string name="tv_forg_pass">Zaboravljena lozinka?</string>
+    <string name="tv_login">PRIJAVA:</string>
+    <string name="tv_register">Registrirajte se</string>
+    <string name="txt_password">Lozinka</string>
+    <string name="txt_username">Korisničko ime</string>
+</resources>
