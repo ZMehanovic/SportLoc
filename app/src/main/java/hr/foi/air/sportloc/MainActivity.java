@@ -9,11 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Typeface tfRobotoBold;
-    TextView tvLogin;
-    Button btnAccount;
-    Button btnFacebook;
-    Button btnGoogle;
+    private TextView tvLogin;
+    private Button btnAccount;
+    private Button btnFacebook;
+    private Button btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createDesign() {
-        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        Typeface tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         tvLogin.setTypeface(tfRobotoBold);
         btnAccount.setTypeface(tfRobotoBold);
         btnFacebook.setTypeface(tfRobotoBold);

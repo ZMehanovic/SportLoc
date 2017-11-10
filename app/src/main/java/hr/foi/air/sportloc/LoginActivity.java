@@ -1,6 +1,5 @@
 package hr.foi.air.sportloc;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +17,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    Typeface tfRoboto;
-    Typeface tfRobotoBold;
-    EditText txtUsername;
-    EditText txtPassword;
-    Button btnLogin;
-    TextView tvForgPass;
-    TextView tvRegister;
-    Intent intent;
+    private EditText txtUsername;
+    private EditText txtPassword;
+    private Button btnLogin;
+    private TextView tvForgPass;
+    private TextView tvRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         initializeValues();
         createDesign();
-        intent = getIntent();
     }
 
     public void initializeValues() {
@@ -49,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void createDesign() {
-        tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
+        Typeface tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
         txtUsername.setTypeface(tfRoboto);
         txtPassword.setTypeface(tfRoboto);
         btnLogin.setTypeface(tfRobotoBold);
@@ -92,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     public void loginUser(String username, String password) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<LoginUserResponse> call = apiService.getLoginUserInfo(username, password);
+        Call<LoginUserResponse> call = apiService.getLoginUserInfo(username.trim(), password);
         call.enqueue(new Callback<LoginUserResponse>() {
             @Override
             public void onResponse(Call<LoginUserResponse> call, Response<LoginUserResponse> response) {
