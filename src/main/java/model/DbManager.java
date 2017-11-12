@@ -38,11 +38,11 @@ public class DbManager {
 		return result;
 	}
 
-	public boolean updatePassword(String salt, String hash, String username) {
+	public boolean updatePassword(String salt, String hash, String email) {
 		boolean result = false;
 
-		String query = "UPDATE korisnik SET sol = '" + salt + "', lozinka = '" + hash + "'\r\n" + "WHERE kor_ime='"
-				+ username + "';";
+		String query = "UPDATE korisnik SET sol = '" + salt + "', lozinka = '" + hash + "'\r\n" + "WHERE email='"
+				+ email + "';";
 		try {
 			con.createStatement().executeUpdate(query);
 			con.close();
@@ -56,9 +56,9 @@ public class DbManager {
 	public boolean insertUser(UserBean bean) {
 		boolean result = false;
 		String query = "INSERT INTO public.korisnik(\r\n"
-				+ "	ime, prezime, kor_ime, email, lozinka, sol, spol, godina, opis, slika)\r\n" + "	VALUES ('"
+				+ "	ime, prezime, kor_ime, email, lozinka, sol, spol, datum_rodenja, opis, slika)\r\n" + "	VALUES ('"
 				+ bean.getFirstName() + "', '" + bean.getLastName() + "', '" + bean.getUserName() + "', '" + bean.getEmail()
-				+ "', '" + bean.getPassword() + "', '" + bean.getSalt() + "','" + bean.getSex() + "', " + bean.getAge() + ", '"
+				+ "', '" + bean.getPassword() + "', '" + bean.getSalt() + "','" + bean.getSex() + "', '" + bean.getDob() + "', '"
 				+ bean.getDescription() + "', " + bean.getImage() + ");";
 
 		try {

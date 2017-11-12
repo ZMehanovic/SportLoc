@@ -9,7 +9,6 @@ public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int userId;
-	private int age;
 
 	private String firstName;
 	private String lastName;
@@ -20,16 +19,16 @@ public class UserBean implements Serializable {
 	private String password;
 	private String salt;
 	private String image;
+	private String dob;
 
 	public UserBean() {
 
 	}
 
-	public UserBean(int userId, int age, String firstName, String lastName, String userName, String email, String sex,
-			String description, String password, String salt, String image) {
+	public UserBean(int userId, String firstName, String lastName, String userName, String email, String sex,
+			String description, String password, String salt, String image, String dob) {
 		super();
 		this.userId = userId;
-		this.age = age;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
@@ -39,6 +38,7 @@ public class UserBean implements Serializable {
 		this.password = password;
 		this.salt = salt;
 		this.image = image;
+		this.dob = dob;
 	}
 
 	public int getUserId() {
@@ -48,14 +48,6 @@ public class UserBean implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getFirstName() {
@@ -128,6 +120,14 @@ public class UserBean implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 
 }

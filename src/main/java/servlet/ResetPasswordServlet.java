@@ -13,8 +13,8 @@ import org.json.JSONObject;
 import controller.UserController;
 import helper.HttpServletHelper;
 
-@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServletHelper {
+@WebServlet(name = "ResetPasswordServlet", urlPatterns = { "/resetPassword" })
+public class ResetPasswordServlet extends HttpServletHelper {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServletHelper {
 		JSONObject result = new JSONObject();
 		UserController user = new UserController();
 
-		result.put("loginSuccessful", user.checkLoginData(req.getParameterMap()));
+		result.put("reset", user.resetPassword(req.getParameter("email")));
 
 		resp.setContentType("application/json");
 		ServletOutputStream out = resp.getOutputStream();

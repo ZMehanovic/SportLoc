@@ -18,6 +18,7 @@ import helper.HttpServletHelper;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = { "/register" })
 public class RegistrationServlet extends HttpServletHelper {
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -25,10 +26,9 @@ public class RegistrationServlet extends HttpServletHelper {
 			throws ServletException, IOException {
 		Gson gson = new Gson();
 		JSONObject result = new JSONObject();
-		
 		result.put("registrationSuccessful",
 				(new UserController()).registerUser(gson.fromJson(getBody(request), UserBean.class)));
-		
+
 		response.setContentType("application/json");
 		ServletOutputStream out = response.getOutputStream();
 		out.write(result.toString().getBytes());

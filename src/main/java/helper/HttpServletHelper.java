@@ -12,7 +12,6 @@ public class HttpServletHelper  extends HttpServlet{
 	
 	public static String getBody(HttpServletRequest request) throws IOException {
 		
-	    String body = null;
 	    StringBuilder stringBuilder = new StringBuilder();
 	    BufferedReader bufferedReader = null;
 
@@ -39,8 +38,7 @@ public class HttpServletHelper  extends HttpServlet{
 	        }
 	    }
 
-	    body = stringBuilder.toString();
-	    return body;
+	    return stringBuilder.toString();
 	}
 
 }

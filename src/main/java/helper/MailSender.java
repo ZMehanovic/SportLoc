@@ -12,11 +12,12 @@ import com.sendgrid.SendGrid;
 
 public class MailSender {
 
-	public void sendEmail(String recipient) {
-		Email from = new Email("sportloc@sportloc.com");
-	    String subject = "Registracija SportLoc";
+	private final String SENDER_EMAIL="sportloc@sportloc.com";
+	
+	public void sendEmail(String recipient, String subject, String message) {
+		Email from = new Email(SENDER_EMAIL);
 	    Email to = new Email(recipient);
-	    Content content = new Content("text/plain", "Registracija uspjesna");
+	    Content content = new Content("text/plain", message);
 	    Mail mail = new Mail(from, subject, to, content);
 
 	    SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
