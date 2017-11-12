@@ -3,9 +3,7 @@ package beans;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private int userId;
@@ -14,7 +12,7 @@ public class UserBean implements Serializable {
 	private String lastName;
 	private String userName;
 	private String email;
-	private String sex;
+	private String gender;
 	private String description;
 	private String password;
 	private String salt;
@@ -25,7 +23,7 @@ public class UserBean implements Serializable {
 
 	}
 
-	public UserBean(int userId, String firstName, String lastName, String userName, String email, String sex,
+	public UserBean(int userId, String firstName, String lastName, String userName, String email, String gender,
 			String description, String password, String salt, String image, String dob) {
 		super();
 		this.userId = userId;
@@ -33,7 +31,7 @@ public class UserBean implements Serializable {
 		this.lastName = lastName;
 		this.userName = userName;
 		this.email = email;
-		this.sex = sex;
+		this.gender = gender;
 		this.description = description;
 		this.password = password;
 		this.salt = salt;
@@ -82,12 +80,12 @@ public class UserBean implements Serializable {
 		this.email = email;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getDescription() {

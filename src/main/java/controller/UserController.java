@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.Map;
 
 import beans.UserBean;
