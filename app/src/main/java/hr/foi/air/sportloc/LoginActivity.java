@@ -1,5 +1,6 @@
 package hr.foi.air.sportloc;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(loginUser);
         tvForgPass = (TextView) findViewById(R.id.tvForgPass);
         tvRegister = (TextView) findViewById(R.id.tvRegister);
+        tvRegister.setOnClickListener(openRegistrationActivity);
     }
 
     public void createDesign() {
@@ -104,4 +106,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    View.OnClickListener openRegistrationActivity = new View.OnClickListener() {
+        public void onClick(View view) {
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        }
+    };
 }
