@@ -57,9 +57,9 @@ public class DbManager {
 		boolean result = false;
 		String query = "INSERT INTO public.korisnik(\r\n"
 				+ "	ime, prezime, kor_ime, email, lozinka, sol, spol, datum_rodenja, opis, slika)\r\n" + "	VALUES ('"
-				+ bean.getFirstName() + "', '" + bean.getLastName() + "', '" + bean.getUserName() + "', '" + bean.getEmail()
-				+ "', '" + bean.getPassword() + "', '" + bean.getSalt() + "','" + bean.getGender() + "', '" + bean.getDob() + "', '"
-				+ bean.getDescription() + "', " + bean.getImage() + ");";
+				+ bean.getFirstName() + "', '" + bean.getLastName() + "', '" + bean.getUserName() + "', '"
+				+ bean.getEmail() + "', '" + bean.getPassword() + "', '" + bean.getSalt() + "','" + bean.getGender()
+				+ "', '" + bean.getDob() + "', " + bean.getDescription() + ", " + bean.getImage() + ");";
 
 		try {
 			con.createStatement().executeUpdate(query);
