@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvLogin;
-    private Button btnAccount;
-    private Button btnFacebook;
-    private Button btnGoogle;
+    private Button btnAccount, btnFacebook, btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

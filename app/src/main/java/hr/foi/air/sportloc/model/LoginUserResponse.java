@@ -8,13 +8,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginUserResponse {
     @SerializedName("loginSuccessful")
-    private String loginSuccessful;
+    private boolean loginSuccessful;
 
-    public LoginUserResponse(String loginSuccessful) {
+    public LoginUserResponse(boolean loginSuccessful) {
         this.loginSuccessful = loginSuccessful;
     }
 
-    public String getLoginSuccessful() {
+    public boolean getLoginSuccessful() {
         return loginSuccessful;
     }
 }

@@ -17,11 +17,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText txtUsername;
-    private EditText txtPassword;
+    private EditText txtUsername, txtPassword;
     private Button btnLogin;
-    private TextView tvForgPass;
-    private TextView tvRegister;
+    private TextView tvForgPass, tvRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean checkFieldsEmpty(String username, String password) {
         boolean success = false;
         String errorMsg = "";
-        if(username.trim().isEmpty() && password.trim().isEmpty()) {
+        if(username.trim().isEmpty() && password.isEmpty()) {
             errorMsg = getString(R.string.toast_empty_user_pass);
         }
         else if(username.trim().isEmpty()) {
@@ -91,20 +89,17 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<LoginUserResponse>() {
             @Override
             public void onResponse(Call<LoginUserResponse> call, Response<LoginUserResponse> response) {
-                String result = response.body().getLoginSuccessful();
-                String message = "";
-                if(result.equals("true")) {
+                boolean result = response.body().getLoginSuccessful();
+                String message = getString(R.string.toast_login_fail);
+                if(result) {
                     message = getString(R.string.toast_login_success);
-                }
-                else if(result.equals("false")) {
-                    message = getString(R.string.toast_login_fail);
                 }
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<LoginUserResponse> call, Throwable t) {
-                String message = getString(R.string.toast_login_error);
+                String message = getString(R.string.toast_error);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });
