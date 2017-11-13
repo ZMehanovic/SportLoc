@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/btn_google"
         android:drawableStart="@drawable/google_icon"
         android:gravity="center_horizontal"
