@@ -174,7 +174,9 @@ public class RegistrationActivity extends AppCompatActivity {
     public void registerUser(String name, String surname, String username, String email, String password, String birthday) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<RegisterUserResponse> call = apiService.getRegisterUserInfo(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password.trim(), birthday.trim());
+        User user = new User(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password.trim(), birthday.trim());
+
+        Call<RegisterUserResponse> call = apiService.getRegisterUserInfo(user);
         call.enqueue(new Callback<RegisterUserResponse>() {
             @Override
             public void onResponse(Call<RegisterUserResponse> call, Response<RegisterUserResponse> response) {
