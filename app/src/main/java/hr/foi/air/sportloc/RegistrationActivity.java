@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hr.foi.air.sportloc.model.RegisterUserResponse;
 import hr.foi.air.sportloc.rest.ApiClient;
 import hr.foi.air.sportloc.rest.ApiInterface;
@@ -21,9 +24,42 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private EditText txtName, txtSurname, txtUsername, txtEmail, txtPassword, txtBirthday;
-    private Button btnMale, btnFemale, btnRegistration;
-    private TextView tvGender;
+    @BindView(R.id.txtName)
+    EditText txtName;
+
+    @BindView(R.id.txtSurname)
+    EditText txtSurname;
+
+    @BindView(R.id.txtUsername)
+    EditText txtUsername;
+
+    @BindView(R.id.txtEmail)
+    EditText txtEmail;
+
+    @BindView(R.id.txtPassword)
+    EditText txtPassword;
+
+    @BindView(R.id.txtBirthday)
+    EditText txtBirthday;
+
+    @BindView(R.id.btnMale)
+    Button btnMale;
+
+    @BindView(R.id.btnFemale)
+    Button btnFemale;
+
+    @BindView(R.id.btnRegistration)
+    Button btnRegistration;
+
+    @BindView(R.id.tvGender)
+    TextView tvGender;
+
+    @BindView(R.id.layout_parent)
+    ConstraintLayout layoutParent;
+
+    @BindView(R.id.layout_child)
+    ConstraintLayout layoutChild;
+
     private String genderSelected;
     private Typeface tfRoboto, tfRobotoBold;
 
@@ -34,29 +70,11 @@ public class RegistrationActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        initializeValues();
-        createDesign();
-    }
-
-    public void initializeValues() {
-        txtName = (EditText) findViewById(R.id.txtName);
-        txtSurname = (EditText) findViewById(R.id.txtSurname);
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        txtBirthday = (EditText) findViewById(R.id.txtBirthday);
-        btnMale = (Button) findViewById(R.id.btnMale);
-        btnMale.setOnClickListener(selectMale);
-        btnFemale = (Button) findViewById(R.id.btnFemale);
-        btnFemale.setOnClickListener(selectFemale);
-        btnRegistration = (Button) findViewById(R.id.btnRegistration);
-        btnRegistration.setOnClickListener(registerUser);
-        tvGender = (TextView) findViewById(R.id.tvGender);
+        ButterKnife.bind(this);
         genderSelected = "male";
-        ConstraintLayout layoutParent = (ConstraintLayout) findViewById(R.id.layout_parent);
         hideKeyboardOnClick(layoutParent);
-        ConstraintLayout layoutChild = (ConstraintLayout) findViewById(R.id.layout_child);
         hideKeyboardOnClick(layoutChild);
+        createDesign();
     }
 
     public void createDesign() {
@@ -74,37 +92,34 @@ public class RegistrationActivity extends AppCompatActivity {
         tvGender.setTypeface(tfRoboto);
     }
 
-    View.OnClickListener selectMale = new View.OnClickListener() {
-        public void onClick(View view) {
-            if(genderSelected.equals("female")) {
-                changeGender(btnMale, btnFemale);
-                genderSelected = "male";
-            }
+    @OnClick(R.id.btnMale)
+    public void selectMale(View view) {
+        if(genderSelected.equals("female")) {
+            changeGender(btnMale, btnFemale);
+            genderSelected = "male";
         }
-    };
+    }
 
-    View.OnClickListener selectFemale = new View.OnClickListener() {
-        public void onClick(View view) {
-            if(genderSelected.equals("male")) {
-                changeGender(btnFemale, btnMale);
-                genderSelected = "female";
-            }
+    @OnClick(R.id.btnFemale)
+    public void selectFemale(View view) {
+        if(genderSelected.equals("male")) {
+            changeGender(btnFemale, btnMale);
+            genderSelected = "female";
         }
-    };
+    }
 
-    View.OnClickListener registerUser = new View.OnClickListener() {
-        public void onClick(View view) {
-            String name = txtName.getText().toString();
-            String surname = txtSurname.getText().toString();
-            String username = txtUsername.getText().toString();
-            String email = txtEmail.getText().toString();
-            String password = txtPassword.getText().toString();
-            String birthday = txtBirthday.getText().toString();
-            if(checkFieldsEmpty(name, surname, username, email, password, birthday)) {
-                registerUser(name, surname, username, email ,password, birthday);
-            }
+    @OnClick(R.id.btnRegistration)
+    public void registerUser(View view) {
+        String name = txtName.getText().toString();
+        String surname = txtSurname.getText().toString();
+        String username = txtUsername.getText().toString();
+        String email = txtEmail.getText().toString();
+        String password = txtPassword.getText().toString();
+        String birthday = txtBirthday.getText().toString();
+        if(checkFieldsEmpty(name, surname, username, email, password, birthday)) {
+            registerUser(name, surname, username, email ,password, birthday);
         }
-    };
+    }
 
     public void changeGender(Button btnFocusedGender, Button btnUnfocusedGender) {
         hideSoftKeyboard();

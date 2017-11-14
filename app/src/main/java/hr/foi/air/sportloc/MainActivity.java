@@ -8,9 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
-    private TextView tvLogin;
-    private Button btnAccount, btnFacebook, btnGoogle;
+    @BindView(R.id.tvLogin)
+    TextView tvLogin;
+
+    @BindView(R.id.btnAccount)
+    Button btnAccount;
+
+    @BindView(R.id.btnFacebook)
+    Button btnFacebook;
+
+    @BindView(R.id.btnGoogle)
+    Button btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +32,8 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        initializeValues();
+        ButterKnife.bind(this);
         createDesign();
-    }
-
-    public void initializeValues() {
-        tvLogin = (TextView) findViewById(R.id.tvLogin);
-        btnAccount = (Button) findViewById(R.id.btnAccount);
-        btnAccount.setOnClickListener(openLoginActivity);
-        btnFacebook = (Button) findViewById(R.id.btnFacebook);
-        btnGoogle = (Button) findViewById(R.id.btnGoogle);
     }
 
     public void createDesign() {
@@ -39,10 +44,9 @@ public class MainActivity extends AppCompatActivity {
         btnGoogle.setTypeface(tfRobotoBold);
     }
 
-    View.OnClickListener openLoginActivity = new View.OnClickListener() {
-        public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
-    };
+    @OnClick(R.id.btnAccount)
+    public void openLoginActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

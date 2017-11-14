@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hr.foi.air.sportloc.model.LoginUserResponse;
 import hr.foi.air.sportloc.rest.ApiClient;
 import hr.foi.air.sportloc.rest.ApiInterface;
@@ -18,9 +21,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText txtUsername, txtPassword;
-    private Button btnLogin;
-    private TextView tvForgPass, tvRegister;
+    @BindView(R.id.txtUsername)
+    EditText txtUsername;
+
+    @BindView(R.id.txtPassword)
+    EditText txtPassword;
+
+    @BindView(R.id.btnLogin)
+    Button btnLogin;
+
+    @BindView(R.id.tvForgPass)
+    TextView tvForgPass;
+
+    @BindView(R.id.tvRegister)
+    TextView tvRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        initializeValues();
+        ButterKnife.bind(this);
         createDesign();
-    }
-
-    public void initializeValues() {
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(loginUser);
-        tvForgPass = (TextView) findViewById(R.id.tvForgPass);
-        tvRegister = (TextView) findViewById(R.id.tvRegister);
-        tvRegister.setOnClickListener(openRegistrationActivity);
     }
 
     public void createDesign() {
@@ -53,15 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         tvRegister.setTypeface(tfRoboto);
     }
 
-    View.OnClickListener loginUser = new View.OnClickListener() {
-        public void onClick(View view) {
-            String username = txtUsername.getText().toString();
-            String password = txtPassword.getText().toString();
-            if(checkFieldsEmpty(username, password)) {
-                loginUser(username, password);
-            }
+    @OnClick(R.id.btnLogin)
+    public void loginUserListener(View view) {
+        String username = txtUsername.getText().toString();
+        String password = txtPassword.getText().toString();
+        if(checkFieldsEmpty(username, password)) {
+            loginUser(username, password);
         }
-    };
+    }
 
     public boolean checkFieldsEmpty(String username, String password) {
         boolean success = false;
@@ -107,10 +110,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    View.OnClickListener openRegistrationActivity = new View.OnClickListener() {
-        public void onClick(View view) {
-            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-            startActivity(intent);
-        }
-    };
+    @OnClick(R.id.tvRegister)
+    public void openRegistrationActivity(View view) {
+        Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+        startActivity(intent);
+    }
 }
