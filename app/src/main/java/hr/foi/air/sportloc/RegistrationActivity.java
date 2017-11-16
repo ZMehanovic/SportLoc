@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -48,12 +46,6 @@ public class RegistrationActivity extends AppCompatActivity {
     @BindView(R.id.btnFemale)
     Button btnFemale;
 
-    @BindView(R.id.btnRegistration)
-    Button btnRegistration;
-
-    @BindView(R.id.tvGender)
-    TextView tvGender;
-
     @BindView(R.id.layout_parent)
     ConstraintLayout layoutParent;
 
@@ -61,7 +53,6 @@ public class RegistrationActivity extends AppCompatActivity {
     ConstraintLayout layoutChild;
 
     private String genderSelected;
-    private Typeface tfRoboto, tfRobotoBold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +65,6 @@ public class RegistrationActivity extends AppCompatActivity {
         genderSelected = "male";
         hideKeyboardOnClick(layoutParent);
         hideKeyboardOnClick(layoutChild);
-        createDesign();
-    }
-
-    public void createDesign() {
-        tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-        tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
-        txtName.setTypeface(tfRoboto);
-        txtSurname.setTypeface(tfRoboto);
-        txtUsername.setTypeface(tfRoboto);
-        txtEmail.setTypeface(tfRoboto);
-        txtPassword.setTypeface(tfRoboto);
-        txtBirthday.setTypeface(tfRoboto);
-        btnMale.setTypeface(tfRobotoBold);
-        btnFemale.setTypeface(tfRoboto);
-        btnRegistration.setTypeface(tfRobotoBold);
-        tvGender.setTypeface(tfRoboto);
     }
 
     @OnClick(R.id.btnMale)
@@ -125,12 +100,12 @@ public class RegistrationActivity extends AppCompatActivity {
         hideSoftKeyboard();
         btnUnfocusedGender.setFocusable(false);
         btnUnfocusedGender.setFocusableInTouchMode(false);
-        btnFocusedGender.setTypeface(tfRobotoBold);
+        btnFocusedGender.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
         btnFocusedGender.setBackgroundResource(R.drawable.btn_general_selected);
         btnFocusedGender.setFocusable(true);
         btnFocusedGender.setFocusableInTouchMode(true);
         btnFocusedGender.requestFocus();
-        btnUnfocusedGender.setTypeface(tfRoboto);
+        btnUnfocusedGender.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
         btnUnfocusedGender.setBackgroundResource(R.drawable.btn_general);
     }
 

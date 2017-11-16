@@ -2,7 +2,6 @@ package hr.foi.air.sportloc;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,9 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.btnLogin)
     Button btnLogin;
 
-    @BindView(R.id.tvForgPass)
-    TextView tvForgPass;
-
     @BindView(R.id.tvRegister)
     TextView tvRegister;
 
@@ -54,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         ButterKnife.bind(this);
         setupUI(layout);
-        createDesign();
     }
 
     public static void hideSoftKeyboard(Activity activity) {
@@ -88,16 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                 setupUI(innerView);
             }
         }
-    }
-
-    public void createDesign() {
-        Typeface tfRoboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-        Typeface tfRobotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
-        txtUsername.setTypeface(tfRoboto);
-        txtPassword.setTypeface(tfRoboto);
-        btnLogin.setTypeface(tfRobotoBold);
-        tvForgPass.setTypeface(tfRoboto);
-        tvRegister.setTypeface(tfRoboto);
     }
 
     @OnClick(R.id.btnLogin)
