@@ -1,8 +1,8 @@
-package hr.foi.air.sportloc.rest;
+package hr.foi.air.webservice.rest;
 
-import hr.foi.air.sportloc.User;
-import hr.foi.air.sportloc.model.LoginUserResponse;
-import hr.foi.air.sportloc.model.RegisterUserResponse;
+import hr.foi.air.data.registration.User;
+import hr.foi.air.webservice.model.LoginUserResponse;
+import hr.foi.air.webservice.model.RegisterUserResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

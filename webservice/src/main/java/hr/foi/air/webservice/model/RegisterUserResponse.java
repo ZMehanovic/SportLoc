@@ -1,4 +1,4 @@
-package hr.foi.air.sportloc.model;
+package hr.foi.air.webservice.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package hr.foi.air.sportloc.rest;
+package hr.foi.air.webservice.rest;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,4 +1,4 @@
-package hr.foi.air.sportloc;
+package hr.foi.air.data.registration;
 
 /**
  * Created by Gabriel on 14.11.2017..
