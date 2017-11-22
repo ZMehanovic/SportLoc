@@ -1,20 +1,20 @@
 package hr.foi.air.sportloc;
 
-import android.content.Context;
 import android.graphics.Typeface;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hr.foi.air.data.registration.User;
+import hr.foi.air.sportloc.helper.UIHelperActivity;
 import hr.foi.air.webservice.model.RegisterUserResponse;
 import hr.foi.air.webservice.rest.ApiClient;
 import hr.foi.air.webservice.rest.ApiInterface;
@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends UIHelperActivity {
     @BindView(R.id.txtName)
     EditText txtName;
 
@@ -47,11 +47,11 @@ public class RegistrationActivity extends AppCompatActivity {
     @BindView(R.id.btnFemale)
     Button btnFemale;
 
-    @BindView(R.id.layout_parent)
-    ConstraintLayout layoutParent;
+    @BindViews({R.id.btnMale, R.id.btnFemale, R.id.btnRegistration})
+    List<View> excludedViews;
 
-    @BindView(R.id.layout_child)
-    ConstraintLayout layoutChild;
+    @BindView(R.id.layout)
+    View layout;
 
     private String genderSelected;
 
@@ -64,12 +64,13 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         ButterKnife.bind(this);
         genderSelected = "male";
-        hideKeyboardOnClick(layoutParent);
-        hideKeyboardOnClick(layoutChild);
+        setupUI(layout, excludedViews, RegistrationActivity.this);
     }
 
     @OnClick(R.id.btnMale)
     public void selectMale(View view) {
+        hideSoftKeyboard(RegistrationActivity.this);
+        changeFocus(getFocusThief());
         if(genderSelected.equals("female")) {
             changeGender(btnMale, btnFemale);
             genderSelected = "male";
@@ -78,6 +79,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnFemale)
     public void selectFemale(View view) {
+        hideSoftKeyboard(RegistrationActivity.this);
+        changeFocus(getFocusThief());
         if(genderSelected.equals("male")) {
             changeGender(btnFemale, btnMale);
             genderSelected = "female";
@@ -86,51 +89,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnRegistration)
     public void registerUser(View view) {
+        hideSoftKeyboard(RegistrationActivity.this);
+        changeFocus(getFocusThief());
         String name = txtName.getText().toString();
         String surname = txtSurname.getText().toString();
         String username = txtUsername.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
         String birthday = txtBirthday.getText().toString();
+        //lista stringova
         if(checkFieldsEmpty(name, surname, username, email, password, birthday)) {
             registerUser(name, surname, username, email ,password, birthday);
         }
     }
 
     public void changeGender(Button btnFocusedGender, Button btnUnfocusedGender) {
-        hideSoftKeyboard();
-        btnUnfocusedGender.setFocusable(false);
-        btnUnfocusedGender.setFocusableInTouchMode(false);
         btnFocusedGender.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
         btnFocusedGender.setBackgroundResource(R.drawable.btn_general_selected);
-        btnFocusedGender.setFocusable(true);
-        btnFocusedGender.setFocusableInTouchMode(true);
-        btnFocusedGender.requestFocus();
         btnUnfocusedGender.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
         btnUnfocusedGender.setBackgroundResource(R.drawable.btn_general);
     }
-
-    public void hideSoftKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(getCurrentFocus() != null) {
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-    }
-
-    public void hideKeyboardOnClick(ConstraintLayout layout) {
-        for(int i = 0; i < layout.getChildCount(); i++) {
-            View v = layout.getChildAt(i);
-            if(!(v instanceof EditText) && !(v instanceof Button)) {
-                v.setOnClickListener(hideKeyboardListener);
-            }
-        }
-    }
-
-    View.OnClickListener hideKeyboardListener = new View.OnClickListener() {
-        public void onClick(View view) {
-            hideSoftKeyboard();
-        }
-    };
 
     public boolean checkFieldsEmpty(String name, String surname, String username, String email, String password, String birthday) {
         boolean success = false;
