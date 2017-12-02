@@ -11,12 +11,12 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import beans.UserBean;
+import beans.EventBean;
 import helper.HttpServletHelper;
-import model.UserModel;
+import model.EventModel;
 
-@WebServlet(name = "RegistrationServlet", urlPatterns = { "/register" })
-public class RegistrationServlet extends HttpServletHelper {
+@WebServlet(name = "EventCreationServlet", urlPatterns = { "/createEvent" })
+public class EventCreationServlet extends HttpServletHelper {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,9 +25,13 @@ public class RegistrationServlet extends HttpServletHelper {
 			throws ServletException, IOException {
 		Gson gson = new Gson();
 		JSONObject result = new JSONObject();
-		result.put("registrationSuccessful",
-				(new UserModel()).registerUser(gson.fromJson(getBody(request), UserBean.class)));
 
+		String responseMessage = new EventModel().createEvent(gson.fromJson(getBody(request), EventBean.class));
+		boolean success = responseMessage == null;
+		result.put("success", success);
+		result.put("message", success ? "Event has been created successfully." : responseMessage);
+
+		response.setContentType("application/json");
 		showResponse(response, result);
 	}
 

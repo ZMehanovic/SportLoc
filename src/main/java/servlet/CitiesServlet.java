@@ -7,22 +7,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import helper.HttpServletHelper;
-import model.UserModel;
+import model.EventModel;
 
-@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServletHelper {
+@WebServlet(name = "CitiesServlet", urlPatterns = { "/getCities" })
+public class CitiesServlet extends HttpServletHelper {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject result = new JSONObject();
-		UserModel user = new UserModel();
-
-		result.put("loginSuccessful", user.checkLoginData(request.getParameterMap()));
+//		JSONObject result = new JSONObject();
+		EventModel event = new EventModel();
+//		JSONArray result = new JSONArray();
+		String result = new Gson().toJson(event.getCitiesList());
+		//		result.put(event.getCitiesList());
+//		result.put("result", event.getCitiesList());
 
 		showResponse(response, result);
 	}
