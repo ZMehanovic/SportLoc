@@ -13,14 +13,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hr.foi.air.data.registration.User;
+import hr.foi.air.data.User;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
-import hr.foi.air.webservice.model.RegisterUserResponse;
-import hr.foi.air.webservice.rest.ApiClient;
-import hr.foi.air.webservice.rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import hr.foi.air.webservice.WebServiceCaller;
 
 public class RegistrationActivity extends UIHelperActivity {
     @BindView(R.id.txtName)
@@ -126,27 +121,11 @@ public class RegistrationActivity extends UIHelperActivity {
     }
 
     public void registerUser(String name, String surname, String username, String email, String password, String birthday) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String type = "registration";
+        User user = new User();
+        user.setRegistrationData(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password, birthday.trim());
 
-        User user = new User(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password.trim(), birthday.trim());
-
-        Call<RegisterUserResponse> call = apiService.getRegisterUserInfo(user);
-        call.enqueue(new Callback<RegisterUserResponse>() {
-            @Override
-            public void onResponse(Call<RegisterUserResponse> call, Response<RegisterUserResponse> response) {
-                boolean result = response.body().getRegistrationSuccessful();
-                String message = getString(R.string.toast_registration_fail);
-                if(result) {
-                    message = getString(R.string.toast_registration_success);
-                }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<RegisterUserResponse> call, Throwable t) {
-                String message = getString(R.string.toast_error);
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-        });
+        WebServiceCaller webServiceCaller = new WebServiceCaller();
+        webServiceCaller.CallWebService(user, type, getApplicationContext());
     }
 }

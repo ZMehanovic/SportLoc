@@ -12,13 +12,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import hr.foi.air.data.User;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
-import hr.foi.air.webservice.model.LoginUserResponse;
-import hr.foi.air.webservice.rest.ApiClient;
-import hr.foi.air.webservice.rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import hr.foi.air.webservice.WebServiceCaller;
 
 public class LoginActivity extends UIHelperActivity {
     @BindView(R.id.txtUsername)
@@ -77,26 +73,12 @@ public class LoginActivity extends UIHelperActivity {
     }
 
     public void loginUser(String username, String password) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String type = "login";
+        User user = new User();
+        user.setLoginData(username, password);
 
-        Call<LoginUserResponse> call = apiService.getLoginUserInfo(username.trim(), password);
-        call.enqueue(new Callback<LoginUserResponse>() {
-            @Override
-            public void onResponse(Call<LoginUserResponse> call, Response<LoginUserResponse> response) {
-                boolean result = response.body().getLoginSuccessful();
-                String message = getString(R.string.toast_login_fail);
-                if(result) {
-                    message = getString(R.string.toast_login_success);
-                }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<LoginUserResponse> call, Throwable t) {
-                String message = getString(R.string.toast_error);
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-        });
+        WebServiceCaller webServiceCaller = new WebServiceCaller();
+        webServiceCaller.CallWebService(user, type, getApplicationContext());
     }
 
     @OnClick(R.id.tvRegister)

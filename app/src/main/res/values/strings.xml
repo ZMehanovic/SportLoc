@@ -12,11 +12,6 @@
     <string name="toast_empty_registration">Sva polja za registraciju moraju biti popunjena!</string>
     <string name="toast_empty_user">Polje za unos korisničkog imena ne smije biti prazno!</string>
     <string name="toast_empty_user_pass">Polja za unos korisničkog imena i lozinke ne smiju biti prazna!</string>
-    <string name="toast_error">Pojavila se pogreška! Provjerite internetsku vezu i pokušajte ponovo.</string>
-    <string name="toast_login_fail">Unijeli ste pogrešno korisničko ime ili lozinku!</string>
-    <string name="toast_login_success">Prijava uspješna</string>
-    <string name="toast_registration_fail">Pojavila se pogreška prilikom registracije!</string>
-    <string name="toast_registration_success">Registracija uspješna</string>
     <string name="tv_forg_pass">Zaboravljena lozinka?</string>
     <string name="tv_gender">Spol</string>
     <string name="tv_login">PRIJAVA:</string>

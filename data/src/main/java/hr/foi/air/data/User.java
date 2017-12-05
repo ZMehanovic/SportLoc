@@ -1,4 +1,4 @@
-package hr.foi.air.data.registration;
+package hr.foi.air.data;
 
 /**
  * Created by Gabriel on 14.11.2017..
@@ -13,8 +13,20 @@ public class User {
     private String password;
     private String dob;
 
+    public String getUserName() {
+        return userName;
+    }
 
-    public User(String firstName, String lastName, String userName, String email, String gender, String password, String dob) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setLoginData(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public void setRegistrationData(String firstName, String lastName, String userName, String email, String gender, String password, String dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
