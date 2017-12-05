@@ -22,12 +22,8 @@ public class SportServlet extends HttpServletHelper {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// JSONArray result = new JSONArray();
 		EventModel event = new EventModel();
-		// result.put(itiesList());
 		String result = new Gson().toJson(event.getSportsList());
-
-		// result.put("result", event.getSportsList());
 
 		showResponse(response, result);
 	}

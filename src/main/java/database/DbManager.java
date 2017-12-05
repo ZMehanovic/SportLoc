@@ -76,7 +76,7 @@ public class DbManager {
 		String result = null;
 		String query = "INSERT INTO public.dogadaj(\r\n"
 				+ "	naziv, kapacitet, od, \"do\", adresa, otvoreno, opis, id_sport, id_grad, kreator)	VALUES ('"
-				+ bean.getTitle() + "', '" + bean.getCapacity() + "', '" + bean.getStartTime() + "', '"
+				+ bean.getTitle() + "', '" + bean.getMaxCapacity() + "', '" + bean.getStartTime() + "', '"
 				+ bean.getEndTime() + "', '" + bean.getAddress() + "', '" + bean.isOpenEvent() + "','"
 				+ bean.getDescription() + "', " + bean.getSportId() + ", " + bean.getLocationId() + ", '"
 				+ bean.getCreatorEmail() + "');";
@@ -85,7 +85,7 @@ public class DbManager {
 			con.createStatement().executeUpdate(query);
 			con.close();
 		} catch (SQLException e) {
-			result = "Error occured while executing query. \nPlease try again or contact admin.";
+			result = "Error occured while executing query. Please try again or contact admin.";
 			e.printStackTrace();
 		}
 		return result;
@@ -113,6 +113,53 @@ public class DbManager {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public ResultSet getEvents() {
+		ResultSet result = null;
+		String query= "SELECT n1.*,\r\n" + 
+				"       n2.sudionici\r\n" + 
+				"FROM\r\n" + 
+				"  (SELECT d.id_dogadaj,\r\n" + 
+				"          d.naziv,\r\n" + 
+				"          kapacitet,\r\n" + 
+				"          od,\r\n" + 
+				"          \"do\",\r\n" + 
+				"          adresa,\r\n" + 
+				"          otvoreno,\r\n" + 
+				"          d.opis,\r\n" + 
+				"          s.naziv sport,\r\n" + 
+				"          gr.naziv grad,\r\n" + 
+				"          ko.kor_ime kreator,\r\n" + 
+				"          gr.id_grad,\r\n" + 
+				"          s.id_sport\r\n" + 
+				"   FROM public.dogadaj d\r\n" + 
+				"   INNER JOIN public.grad gr ON gr.id_grad=d.id_grad\r\n" + 
+				"   INNER JOIN public.sport s ON s.id_sport=d.id_sport\r\n" + 
+				"   INNER JOIN public.korisnik ko ON ko.email=d.kreator\r\n" + 
+				"   GROUP BY d.id_dogadaj,\r\n" + 
+				"            s.naziv,\r\n" + 
+				"            gr.naziv,\r\n" + 
+				"            ko.kor_ime,\r\n" + 
+				"            gr.id_grad,\r\n" + 
+				"            s.id_sport) AS n1\r\n" + 
+				"LEFT JOIN\r\n" + 
+				"  (SELECT count(s.id_dogadaj) AS sudionici,\r\n" + 
+				"          d.id_dogadaj\r\n" + 
+				"   FROM public.dogadaj d\r\n" + 
+				"   INNER JOIN public.sudionik s ON s.id_dogadaj=d.id_dogadaj\r\n" + 
+				"   WHERE s.status='accepted'\r\n" + 
+				"   GROUP BY s.id_dogadaj,\r\n" + 
+				"            d.id_dogadaj) AS n2 ON n2.id_dogadaj=n1.id_dogadaj;";
+		try {
+
+			result = getConnection().createStatement().executeQuery(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
 	}
 
 }

@@ -1,44 +1,31 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class EventBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int eventId, sportId, locationId;
-	
+	private int eventId, sportId, locationId, maxCapacity, currentCapacity;
+
 	private boolean openEvent;
 
 	private String creatorEmail;
+	private String creatorUserName;
 	private String title;
-	private String capacity;
 	private String startTime;
 	private String endTime;
 	private String description;
 	private String address;
+	private String sport;
+	private String location;
+
+	private ArrayList<UserBean> members;
 
 	public EventBean() {
 
-	}	
-
-	public EventBean(int eventId, int sportId, int locationId, boolean openEvent, String creatorEmail, String title,
-			String capacity, String startTime, String endTime, String description, String address) {
-		super();
-		this.eventId = eventId;
-		this.sportId = sportId;
-		this.locationId = locationId;
-		this.openEvent = openEvent;
-		this.creatorEmail = creatorEmail;
-		this.title = title;
-		this.capacity = capacity;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.description = description;
-		this.address = address;
 	}
-
-
 
 	public int getEventId() {
 		return eventId;
@@ -80,6 +67,14 @@ public class EventBean implements Serializable {
 		this.creatorEmail = creatorEmail;
 	}
 
+	public String getCreatorUserName() {
+		return creatorUserName;
+	}
+
+	public void setCreatorUserName(String creatorUserName) {
+		this.creatorUserName = creatorUserName;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -88,12 +83,21 @@ public class EventBean implements Serializable {
 		this.title = title;
 	}
 
-	public String getCapacity() {
-		return capacity;
+
+	public int getMaxCapacity() {
+		return maxCapacity;
 	}
 
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+
+	public int getCurrentCapacity() {
+		return currentCapacity;
+	}
+
+	public void setCurrentCapacity(int currentCapacity) {
+		this.currentCapacity = currentCapacity;
 	}
 
 	public String getStartTime() {
@@ -126,6 +130,30 @@ public class EventBean implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public ArrayList<UserBean> getMembers() {
+		return members;
+	}
+
+	public void setMembers(ArrayList<UserBean> members) {
+		this.members = members;
+	}
+
+	public String getSport() {
+		return sport;
+	}
+
+	public void setSport(String sport) {
+		this.sport = sport;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	

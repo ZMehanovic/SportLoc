@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServletHelper {
 		JSONObject result = new JSONObject();
 		UserModel user = new UserModel();
 
-		result.put("loginSuccessful", user.checkLoginData(request.getParameterMap()));
+		result.put("success", user.checkLoginData(request.getParameterMap()));
 
 		showResponse(response, result);
 	}

@@ -49,6 +49,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getFirstName() {
+		firstName = resolveNull(firstName);
 		return firstName;
 	}
 
@@ -57,6 +58,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getLastName() {
+		lastName = resolveNull(lastName);
 		return lastName;
 	}
 
@@ -65,6 +67,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getUserName() {
+		userName = resolveNull(userName);
 		return userName;
 	}
 
@@ -73,6 +76,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getEmail() {
+		email = resolveNull(email);
 		return email;
 	}
 
@@ -81,6 +85,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getGender() {
+		gender = resolveNull(gender);
 		return gender;
 	}
 
@@ -89,6 +94,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getDescription() {
+		description = resolveNull(description);
 		return description;
 	}
 
@@ -97,6 +103,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getPassword() {
+		password = resolveNull(password);
 		return password;
 	}
 
@@ -113,6 +120,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getImage() {
+		image = resolveNull(image);
 		return image;
 	}
 
@@ -121,6 +129,7 @@ public class UserBean implements Serializable {
 	}
 
 	public String getDob() {
+		dob = resolveNull(dob);
 		return dob;
 	}
 
@@ -128,4 +137,10 @@ public class UserBean implements Serializable {
 		this.dob = dob;
 	}
 
+	private String resolveNull(String str) {
+		if (str == null) {
+			str = "";
+		}
+		return str;
+	}
 }

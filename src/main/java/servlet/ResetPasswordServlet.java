@@ -22,7 +22,7 @@ public class ResetPasswordServlet extends HttpServletHelper {
 		JSONObject result = new JSONObject();
 		UserModel user = new UserModel();
 
-		result.put("reset", user.resetPassword(request.getParameter("email")));
+		result.put("success", user.resetPassword(request.getParameter("email")));
 
 		showResponse(response, result);
 	}
