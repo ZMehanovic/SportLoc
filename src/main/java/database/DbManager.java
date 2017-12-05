@@ -217,5 +217,20 @@ public class DbManager {
 		}
 		return result;
 	}
+	
+	public ResultSet getEventMembers(Integer eventId) {
+		ResultSet result = null;
+		String query = "SELECT s.status, ko.email, ko.kor_ime FROM public.sudionik s\r\n"
+				+ "INNER JOIN korisnik ko on ko.email=s.email_korisnik WHERE id_dogadaj=" + eventId + ";";
+		try {
+
+			result = getConnection().createStatement().executeQuery(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
 }

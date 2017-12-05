@@ -35,6 +35,10 @@
 		<servlet-name>MemberSettingsServlet</servlet-name>
 		<servlet-class>servlet.MemberSettingsServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>EventMembersServlet</servlet-name>
+		<servlet-class>servlet.EventMembersServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
@@ -68,6 +72,10 @@
 	<servlet-mapping>
 		<servlet-name>MemberSettingsServlet</servlet-name>
 		<url-pattern>/memberSettings</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EventMembersServlet</servlet-name>
+		<url-pattern>/getEventMembers</url-pattern>
 	</servlet-mapping>
 </web-app>
 

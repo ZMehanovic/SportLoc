@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import beans.EventBean;
+import beans.EventMemberBean;
 import database.DbManager;
 import helper.EventOptions;
 
@@ -177,6 +178,41 @@ public class EventModel {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * Fetches a list of members for a specified event
+	 *
+	 * @param eventId
+	 *            id required for finding event members
+	 * 
+	 * @return list of EventMemberBean containing email, status and username
+	 *         
+	 */
+	public ArrayList<EventMemberBean> getEventMembers(Integer eventId) {
+		if (eventId == null) {
+			return null;
+		}
+		ArrayList<EventMemberBean> result = new ArrayList<EventMemberBean>();
+		ResultSet resultSet=new DbManager().getEventMembers(eventId);
+
+		if (resultSet != null) {
+			try {
+				while (resultSet.next()) {
+					EventMemberBean bean = new EventMemberBean();
+					bean.setEmail(resultSet.getString("email"));
+					bean.setStatus(resultSet.getString("status"));
+					bean.setUsername(resultSet.getString("kor_ime"));
+					result.add(bean);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+		
 	}
 
 }

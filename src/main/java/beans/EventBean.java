@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class EventBean implements Serializable {
 
@@ -22,8 +21,6 @@ public class EventBean implements Serializable {
 	private String sport;
 	private String location;
 	private String option;
-
-	private ArrayList<UserBean> members;
 	
 	public EventBean() {
 
@@ -132,14 +129,6 @@ public class EventBean implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public ArrayList<UserBean> getMembers() {
-		return members;
-	}
-
-	public void setMembers(ArrayList<UserBean> members) {
-		this.members = members;
 	}
 
 	public String getSport() {

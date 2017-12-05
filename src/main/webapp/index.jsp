@@ -11,6 +11,7 @@
 		<br />-getCities -Returns list(id, title)
 		<br />-getEvents -Returns list(EventBean)
 		<br />-memberSettings -Requires: params(email, eventId, status) -Returns success(boolean)
+		<br />-getEventMembers -Requires: params(eventId) -Returns list(EventMembersBean)
 	</h3>
 </body>
 </html>
