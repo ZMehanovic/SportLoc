@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -68,5 +69,21 @@ public class UIHelperActivity extends AppCompatActivity {
         ((ViewGroup) view).addView(thiefLayout);
         focusThief = findViewById(R.id.focus_thief);
         applyOnClickListener(view, excludedViews);
+    }
+
+    public boolean checkFieldsEmpty(String errorMsg, String password, String... fieldsArray) {
+        boolean success = true;
+        if(password != null && password.isEmpty()) {
+            success = false;
+        }
+        for(String field : fieldsArray) {
+            if(field.trim().isEmpty()) {
+                success = false;
+            }
+        }
+        if(!success) {
+            Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+        }
+        return success;
     }
 }
