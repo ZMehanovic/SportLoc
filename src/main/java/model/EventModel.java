@@ -8,18 +8,57 @@ import java.util.Map;
 
 import beans.EventBean;
 import database.DbManager;
+import helper.EventOptions;
 
 public class EventModel {
+	
 	/**
 	 * Creates a new event based on data provided
 	 * 
 	 * @param eventBean
 	 *            bean containing data about event
-	 * @return error message, null if successful
+	 * @return boolean, true if successful
 	 */
-	public String createEvent(EventBean eventBean) {
+	public boolean resolveEvent(EventBean eventBean) {
+		boolean result = false;
+
+		switch (EventOptions.valueOf(eventBean.getOption().toUpperCase())) {
+		case CREATE:
+		case UPDATE:
+			result = createUpdateEvent(eventBean);
+			break;
+		case DELETE:
+			result = deleteEvent(eventBean.getEventId());
+			break;
+		default:
+			break;
+
+		}
+		
+		return result;
+	}
+	/**
+	 * deletes event by id
+	 *  
+	 * @param eventId
+	 * @return boolean, true if successful
+	 */
+	private boolean deleteEvent(Integer eventId) {
+		boolean result = new DbManager().deleteEvent(eventId);
+		
+		return result;
+	}
+
+	/**
+	 * Creates a new event or updates existing one based on data provided
+	 * 
+	 * @param eventBean
+	 *            bean containing data about event
+	 * @return boolean, true if successful
+	 */
+	private boolean createUpdateEvent(EventBean eventBean) {
 		// TODO check values in bean.
-		String result = new DbManager().addEvent(eventBean);
+		boolean result = new DbManager().upsertEvent(eventBean);
 
 		return result;
 	}
@@ -133,7 +172,7 @@ public class EventModel {
 			result = true;
 		}
 		if (result) {
-			result = new DbManager().updateEventMembers(email, status, eventId);
+			result = new DbManager().upsertEventMembers(email, status, eventId);
 
 		}
 

@@ -7,7 +7,8 @@ public class EventBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int eventId, sportId, locationId, maxCapacity, currentCapacity;
+	private Integer eventId;
+	private int  sportId, locationId, maxCapacity, currentCapacity;
 
 	private boolean openEvent;
 
@@ -20,18 +21,19 @@ public class EventBean implements Serializable {
 	private String address;
 	private String sport;
 	private String location;
+	private String option;
 
 	private ArrayList<UserBean> members;
-
+	
 	public EventBean() {
 
 	}
 
-	public int getEventId() {
+	public Integer getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(int eventId) {
+	public void setEventId(Integer eventId) {
 		this.eventId = eventId;
 	}
 
@@ -156,6 +158,12 @@ public class EventBean implements Serializable {
 		this.location = location;
 	}
 
-	
+	public String getOption() {
+		return option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
+	}
 
 }

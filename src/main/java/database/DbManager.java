@@ -72,20 +72,42 @@ public class DbManager {
 		return result;
 	}
 
-	public String addEvent(EventBean bean) {
-		String result = null;
-		String query = "INSERT INTO public.dogadaj(\r\n"
-				+ "	naziv, kapacitet, od, \"do\", adresa, otvoreno, opis, id_sport, id_grad, kreator)	VALUES ('"
-				+ bean.getTitle() + "', '" + bean.getMaxCapacity() + "', '" + bean.getStartTime() + "', '"
-				+ bean.getEndTime() + "', '" + bean.getAddress() + "', '" + bean.isOpenEvent() + "','"
-				+ bean.getDescription() + "', " + bean.getSportId() + ", " + bean.getLocationId() + ", '"
-				+ bean.getCreatorEmail() + "');";
+	public boolean upsertEvent(EventBean bean) {
+		boolean result = false;
+		
+		String eventId = "default";
+		if (bean.getEventId() != null) {
+			eventId = String.valueOf(bean.getEventId());
+		}
+		
+		String query = "INSERT INTO public.dogadaj( id_dogadaj, naziv, kapacitet, od, \"do\", adresa, otvoreno, opis, id_sport, id_grad, kreator)\r\n" + 
+				"VALUES ("+eventId+",\r\n" + 
+				"        '"+ bean.getTitle() + "',\r\n" + 
+				"        '" + bean.getMaxCapacity() + "',\r\n" + 
+				"        '" + bean.getStartTime() + "',\r\n" + 
+				"        '"+ bean.getEndTime() + "',\r\n" + 
+				"        '"+bean.getAddress()+"',\r\n" + 
+				"        "+bean.isOpenEvent()+",\r\n" + 
+				"        '"+bean.getDescription()+"',\r\n" + 
+				"        "+bean.getSportId()+",\r\n" + 
+				"        "+bean.getLocationId()+",\r\n" + 
+				"        '"+bean.getCreatorEmail()+"') ON CONFLICT (id_dogadaj) DO\r\n" + 
+				"UPDATE\r\n" + 
+				"SET naziv = excluded.naziv,\r\n" + 
+				"    kapacitet = excluded.kapacitet,\r\n" + 
+				"    od = excluded.od,\r\n" + 
+				"    \"do\" = excluded.\"do\",\r\n" + 
+				"    adresa = excluded.adresa,\r\n" + 
+				"    otvoreno = excluded.otvoreno,\r\n" + 
+				"    opis = excluded.opis,\r\n" + 
+				"    id_sport = excluded.id_sport,\r\n" + 
+				"    id_grad = excluded.id_grad;";
 
 		try {
 			con.createStatement().executeUpdate(query);
 			con.close();
+			result = true;
 		} catch (SQLException e) {
-			result = "Error occured while executing query. Please try again or contact admin.";
 			e.printStackTrace();
 		}
 		return result;
@@ -162,7 +184,7 @@ public class DbManager {
 
 	}
 	
-	public boolean updateEventMembers(String email, String status, String eventId) {
+	public boolean upsertEventMembers(String email, String status, String eventId) {
 		boolean result = false;
 		String query="INSERT INTO public.sudionik( id_dogadaj, email_korisnik, status)\r\n" + 
 				"VALUES (" + eventId + ",\r\n" + 
@@ -170,6 +192,21 @@ public class DbManager {
 				"        '" + status + "') ON CONFLICT (id_dogadaj, email_korisnik) DO\r\n" + 
 				"UPDATE\r\n" + 
 				"SET status = excluded.status;";
+		try {
+
+			getConnection().createStatement().executeUpdate(query);
+			con.close();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean deleteEvent(Integer eventId) {
+		boolean result = false;
+		String query = "DELETE FROM public.dogadaj WHERE id_dogadaj=" + eventId + ";";
+		
 		try {
 
 			getConnection().createStatement().executeUpdate(query);

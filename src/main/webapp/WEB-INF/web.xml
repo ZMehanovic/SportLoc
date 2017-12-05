@@ -16,8 +16,8 @@
 		<servlet-class>servlet.ResetPasswordServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>EventCreationServlet</servlet-name>
-		<servlet-class>servlet.EventCreationServlet</servlet-class>
+		<servlet-name>EventOptionsServlet</servlet-name>
+		<servlet-class>servlet.EventOptionsServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>SportServlet</servlet-name>
@@ -50,8 +50,8 @@
 		<url-pattern>/resetPassword</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>EventCreationServlet</servlet-name>
-		<url-pattern>/createEvent</url-pattern>
+		<servlet-name>EventOptionsServlet</servlet-name>
+		<url-pattern>/eventSettings</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SportServlet</servlet-name>
