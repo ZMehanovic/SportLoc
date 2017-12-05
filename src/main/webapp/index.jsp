@@ -10,7 +10,7 @@
 		<br />-getSports -Returns list(id, title)
 		<br />-getCities -Returns list(id, title)
 		<br />-getEvents -Returns list(EventBean)
-		<br />
+		<br />-memberSettings -Requires: params(email, eventId, status) -Returns success(boolean)
 	</h3>
 </body>
 </html>

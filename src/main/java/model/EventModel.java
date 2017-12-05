@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import beans.EventBean;
 import database.DbManager;
@@ -90,8 +91,7 @@ public class EventModel {
 					bean.setEventId(resultSet.getInt("id_dogadaj"));
 					bean.setTitle(resultSet.getString("naziv"));
 					bean.setMaxCapacity(resultSet.getInt("kapacitet"));
-					bean.setCurrentCapacity(
-							resultSet.getString("sudionici") != null ? resultSet.getInt("sudionici") : 0);
+					bean.setCurrentCapacity((resultSet.getString("sudionici") != null ? resultSet.getInt("sudionici") : 0) + 1);
 					bean.setStartTime(resultSet.getString("od"));
 					bean.setEndTime(resultSet.getString("do"));
 					bean.setOpenEvent(resultSet.getBoolean("otvoreno"));
@@ -109,4 +109,35 @@ public class EventModel {
 		}
 		return result;
 	}
+	
+	/**
+	 * Updates a request to join event or adds a new one
+	 *
+	 * @param params
+	 *            map containing email,status and eventId
+	 * 
+	 * @return boolean false if an SQL error occurs or if there is a mistake with
+	 *         the parametars otherwise returns true
+	 *         
+	 */
+	public boolean updateEventMember(Map<String, String[]> params) {
+		boolean result = false;
+		String email = "";
+		String status = "";
+		String eventId = "";
+		if (params != null && !params.isEmpty() && params.containsKey("email") && params.containsKey("status")
+				&& params.containsKey("eventId")) {
+			email = params.get("email")[0];
+			status = params.get("status")[0];
+			eventId = params.get("eventId")[0];
+			result = true;
+		}
+		if (result) {
+			result = new DbManager().updateEventMembers(email, status, eventId);
+
+		}
+
+		return result;
+	}
+
 }

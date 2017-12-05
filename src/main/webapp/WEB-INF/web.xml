@@ -27,12 +27,16 @@
 		<servlet-name>CitiesServlet</servlet-name>
 		<servlet-class>servlet.CitiesServlet</servlet-class>
 	</servlet>
-<servlet>
+	<servlet>
 		<servlet-name>EventListServlet</servlet-name>
 		<servlet-class>servlet.EventListServlet</servlet-class>
 	</servlet>
-	
-	
+	<servlet>
+		<servlet-name>MemberSettingsServlet</servlet-name>
+		<servlet-class>servlet.MemberSettingsServlet</servlet-class>
+	</servlet>
+
+
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -60,6 +64,10 @@
 	<servlet-mapping>
 		<servlet-name>EventListServlet</servlet-name>
 		<url-pattern>/getEvents</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MemberSettingsServlet</servlet-name>
+		<url-pattern>/memberSettings</url-pattern>
 	</servlet-mapping>
 </web-app>
 

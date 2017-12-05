@@ -161,5 +161,24 @@ public class DbManager {
 		return result;
 
 	}
+	
+	public boolean updateEventMembers(String email, String status, String eventId) {
+		boolean result = false;
+		String query="INSERT INTO public.sudionik( id_dogadaj, email_korisnik, status)\r\n" + 
+				"VALUES (" + eventId + ",\r\n" + 
+				"        '" + email + "',\r\n" + 
+				"        '" + status + "') ON CONFLICT (id_dogadaj, email_korisnik) DO\r\n" + 
+				"UPDATE\r\n" + 
+				"SET status = excluded.status;";
+		try {
+
+			getConnection().createStatement().executeUpdate(query);
+			con.close();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
