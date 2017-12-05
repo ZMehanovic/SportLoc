@@ -10,9 +10,7 @@
     <string name="btn_male">Muško</string>
     <string name="btn_pronadi">PRONAĐI</string>
     <string name="btn_registration">REGISTRACIJA</string>
-    <string name="toast_empty_pass">Polje za unos lozinke ne smije biti prazno!</string>
     <string name="toast_empty_registration">Sva polja za registraciju moraju biti popunjena!</string>
-    <string name="toast_empty_user">Polje za unos korisničkog imena ne smije biti prazno!</string>
     <string name="toast_empty_user_pass">Polja za unos korisničkog imena i lozinke ne smiju biti prazna!</string>
     <string name="tv_forg_pass">Zaboravljena lozinka?</string>
     <string name="tv_gender">Spol</string>

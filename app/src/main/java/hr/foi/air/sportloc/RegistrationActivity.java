@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -92,8 +91,8 @@ public class RegistrationActivity extends UIHelperActivity {
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
         String birthday = txtBirthday.getText().toString();
-        //lista stringova
-        if(checkFieldsEmpty(name, surname, username, email, password, birthday)) {
+        String errorMsg = getString(R.string.toast_empty_registration);
+        if(checkFieldsEmpty(errorMsg, password, name, surname, username, email, birthday)) {
             registerUser(name, surname, username, email ,password, birthday);
         }
     }
@@ -103,21 +102,6 @@ public class RegistrationActivity extends UIHelperActivity {
         btnFocusedGender.setBackgroundResource(R.drawable.btn_general_selected);
         btnUnfocusedGender.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
         btnUnfocusedGender.setBackgroundResource(R.drawable.btn_general);
-    }
-
-    public boolean checkFieldsEmpty(String name, String surname, String username, String email, String password, String birthday) {
-        boolean success = false;
-        String errorMsg = "";
-        if(name.trim().isEmpty() || surname.trim().isEmpty() || username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty() || birthday.trim().isEmpty()) {
-            errorMsg = getString(R.string.toast_empty_registration);
-        }
-        else {
-            success = true;
-        }
-        if(!success) {
-            Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
-        }
-        return success;
     }
 
     public void registerUser(String name, String surname, String username, String email, String password, String birthday) {

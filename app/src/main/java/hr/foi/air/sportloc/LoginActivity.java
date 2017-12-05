@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -46,30 +45,10 @@ public class LoginActivity extends UIHelperActivity {
         changeFocus(getFocusThief());
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
-        if(checkFieldsEmpty(username, password)) {
+        String errorMsg = getString(R.string.toast_empty_user_pass);
+        if(checkFieldsEmpty(errorMsg, password, username)) {
             loginUser(username, password);
         }
-    }
-
-    public boolean checkFieldsEmpty(String username, String password) {
-        boolean success = false;
-        String errorMsg = "";
-        if(username.trim().isEmpty() && password.isEmpty()) {
-            errorMsg = getString(R.string.toast_empty_user_pass);
-        }
-        else if(username.trim().isEmpty()) {
-            errorMsg = getString(R.string.toast_empty_user);
-        }
-        else if(password.trim().isEmpty()) {
-            errorMsg = getString(R.string.toast_empty_pass);
-        }
-        else {
-            success = true;
-        }
-        if(!success) {
-            Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
-        }
-        return success;
     }
 
     public void loginUser(String username, String password) {
