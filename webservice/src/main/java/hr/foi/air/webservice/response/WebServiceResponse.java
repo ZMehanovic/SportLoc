@@ -7,21 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class WebServiceResponse {
-    @SerializedName("loginSuccessful")
-    private boolean loginSuccessful;
+    @SerializedName("success")
+    private boolean success;
 
-    @SerializedName("registrationSuccessful")
-    private boolean registrationSuccessful;
-
-    public WebServiceResponse(boolean loginSuccessful, boolean registrationSuccessful) {
-        this.loginSuccessful = loginSuccessful;
-        this.registrationSuccessful = registrationSuccessful;
+    public WebServiceResponse(boolean success) {
+        this.success = success;
     }
 
     public boolean getLoginSuccessful() {
-        return loginSuccessful;
+        return success;
     }
     public boolean getRegistrationSuccessful() {
-        return registrationSuccessful;
+        return success;
     }
 }
