@@ -3,6 +3,7 @@ package hr.foi.air.sportloc;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import butterknife.OnClick;
 import hr.foi.air.data.User;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
 import hr.foi.air.webservice.WebServiceCaller;
+import hr.foi.air.webservice.WebServiceHandler;
 
 public class ForgPassActivity extends UIHelperActivity {
     @BindView(R.id.txtEmail)
@@ -52,6 +54,16 @@ public class ForgPassActivity extends UIHelperActivity {
         user.setEmail(email);
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
-        webServiceCaller.CallWebService(user, type, getApplicationContext());
+        webServiceCaller.callWebService(user, type, getApplicationContext(), new WebServiceHandler() {
+            @Override
+            public void onDataArrived(Object result) {
+                boolean answer = (boolean) result;
+                String message = getString(R.string.toast_forg_pass_fail);
+                if(answer) {
+                    message = getString(R.string.toast_forg_pass_success);
+                }
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
