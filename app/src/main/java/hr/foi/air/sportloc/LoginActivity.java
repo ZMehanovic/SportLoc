@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hr.foi.air.data.User;
+import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
 import hr.foi.air.webservice.WebServiceCaller;
 
@@ -42,7 +42,7 @@ public class LoginActivity extends UIHelperActivity {
     @OnClick(R.id.btnLogin)
     public void loginUserListener(View view) {
         hideSoftKeyboard(LoginActivity.this);
-        changeFocus(getFocusThief());
+        changeFocus(null , true);
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String errorMsg = getString(R.string.toast_empty_user_pass);
@@ -53,25 +53,25 @@ public class LoginActivity extends UIHelperActivity {
 
     public void loginUser(String username, String password) {
         String type = "login";
-        User user = new User();
-        user.setLoginData(username, password);
+        UserBean userBean = new UserBean();
+        userBean.setLoginData(username, password);
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
-        webServiceCaller.CallWebService(user, type, getApplicationContext());
+        webServiceCaller.CallWebService(userBean, type, getApplicationContext());
     }
 
     @OnClick(R.id.tvForgPass)
     public void openForgPassActivity(View view) {
         hideSoftKeyboard(LoginActivity.this);
-        changeFocus(getFocusThief());
-        Intent intent = new Intent(LoginActivity.this, ForgPassActivity.class);
+        changeFocus(null, true);
+        Intent intent = new Intent(LoginActivity.this, ForgottenPassActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.tvRegister)
     public void openRegistrationActivity(View view) {
         hideSoftKeyboard(LoginActivity.this);
-        changeFocus(getFocusThief());
+        changeFocus(null, true);
         Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(intent);
     }

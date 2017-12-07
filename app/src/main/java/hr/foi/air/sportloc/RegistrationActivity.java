@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hr.foi.air.data.User;
+import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
 import hr.foi.air.webservice.WebServiceCaller;
 
@@ -64,7 +64,7 @@ public class RegistrationActivity extends UIHelperActivity {
     @OnClick(R.id.btnMale)
     public void selectMale(View view) {
         hideSoftKeyboard(RegistrationActivity.this);
-        changeFocus(getFocusThief());
+        changeFocus(null, true);
         if(genderSelected.equals("female")) {
             changeGender(btnMale, btnFemale);
             genderSelected = "male";
@@ -74,7 +74,7 @@ public class RegistrationActivity extends UIHelperActivity {
     @OnClick(R.id.btnFemale)
     public void selectFemale(View view) {
         hideSoftKeyboard(RegistrationActivity.this);
-        changeFocus(getFocusThief());
+        changeFocus(null, true);
         if(genderSelected.equals("male")) {
             changeGender(btnFemale, btnMale);
             genderSelected = "female";
@@ -84,7 +84,7 @@ public class RegistrationActivity extends UIHelperActivity {
     @OnClick(R.id.btnRegistration)
     public void registerUser(View view) {
         hideSoftKeyboard(RegistrationActivity.this);
-        changeFocus(getFocusThief());
+        changeFocus(null, true);
         String name = txtName.getText().toString();
         String surname = txtSurname.getText().toString();
         String username = txtUsername.getText().toString();
@@ -106,10 +106,10 @@ public class RegistrationActivity extends UIHelperActivity {
 
     public void registerUser(String name, String surname, String username, String email, String password, String birthday) {
         String type = "registration";
-        User user = new User();
-        user.setRegistrationData(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password, birthday.trim());
+        UserBean userBean = new UserBean();
+        userBean.setRegistrationData(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password, birthday.trim());
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
-        webServiceCaller.CallWebService(user, type, getApplicationContext());
+        webServiceCaller.CallWebService(userBean, type, getApplicationContext());
     }
 }

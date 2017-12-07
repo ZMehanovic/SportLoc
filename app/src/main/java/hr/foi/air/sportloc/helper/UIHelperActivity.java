@@ -19,43 +19,47 @@ import hr.foi.air.sportloc.R;
 
 public class UIHelperActivity extends AppCompatActivity {
 
-    private View focusThief;
+    private static View focusThief;
     private Activity currentActivity;
 
-    public View getFocusThief() {
-        return focusThief;
-    }
-
-    public void setCurrentActivity(Activity currentActivity) {
-        this.currentActivity = currentActivity;
-    }
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if(activity.getCurrentFocus() != null) {
+        if (activity.getCurrentFocus() != null) {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
 
-    public static void changeFocus(View view) {
-        view.setFocusable(true);
-        view.setFocusableInTouchMode(true);
+    /**
+     *
+     * @param view View you wish to set focusable if null it will set focusThief
+     * @param focus set true or false
+     */
+
+    public static void changeFocus(View view, boolean focus) {
+        if (view == null && focusThief != null) {
+            view = focusThief;
+        } else {
+            return;
+        }
+        view.setFocusable(focus);
+        view.setFocusableInTouchMode(focus);
         view.requestFocus();
     }
 
     public void applyOnClickListener(View view, List<View> excludedViews) {
-        if(!(view instanceof EditText || excludedViews.contains(view))) {
+        if (!(view instanceof EditText || excludedViews.contains(view))) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     hideSoftKeyboard(currentActivity);
-                    changeFocus(focusThief);
+                    changeFocus(null,true);
                 }
             });
         }
 
-        if(view instanceof ViewGroup) {
-            for(int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
                 View innerView = ((ViewGroup) view).getChildAt(i);
                 applyOnClickListener(innerView, excludedViews);
             }
@@ -73,17 +77,21 @@ public class UIHelperActivity extends AppCompatActivity {
 
     public boolean checkFieldsEmpty(String errorMsg, String password, String... fieldsArray) {
         boolean success = true;
-        if(password != null && password.isEmpty()) {
+        if (password != null && password.isEmpty()) {
             success = false;
         }
-        for(String field : fieldsArray) {
-            if(field.trim().isEmpty()) {
+        for (String field : fieldsArray) {
+            if (field.trim().isEmpty()) {
                 success = false;
             }
         }
-        if(!success) {
+        if (!success) {
             Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
         }
         return success;
+    }
+
+    public void setCurrentActivity(Activity currentActivity) {
+        this.currentActivity = currentActivity;
     }
 }

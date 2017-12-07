@@ -21,7 +21,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".StartActivity" />
-        <activity android:name=".ForgPassActivity" />
+        <activity android:name=".ForgottenPassActivity" />
     </application>
 
 </manifest>
