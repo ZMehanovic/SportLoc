@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">webservice</string>
     <string name="toast_error">Pojavila se pogreška! Provjerite internetsku vezu i pokušajte ponovo.</string>
+    <string name="toast_forg_pass_fail">Pojavila se pogreška prilikom obnavljanja vaše lozinke!</string>
+    <string name="toast_forg_pass_success">Obnavljanje lozinke uspješno</string>
     <string name="toast_login_fail">Unijeli ste pogrešno korisničko ime ili lozinku!</string>
     <string name="toast_login_success">Prijava uspješna</string>
     <string name="toast_registration_fail">Pojavila se pogreška prilikom registracije!</string>

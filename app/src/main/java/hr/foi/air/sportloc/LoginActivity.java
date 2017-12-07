@@ -22,7 +22,7 @@ public class LoginActivity extends UIHelperActivity {
     @BindView(R.id.txtPassword)
     EditText txtPassword;
 
-    @BindViews({R.id.btnLogin, R.id.tvRegister})
+    @BindViews({R.id.btnLogin, R.id.tvForgPass, R.id.tvRegister})
     List<View> excludedViews;
 
     @BindView(R.id.layout)
@@ -58,6 +58,14 @@ public class LoginActivity extends UIHelperActivity {
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
         webServiceCaller.CallWebService(user, type, getApplicationContext());
+    }
+
+    @OnClick(R.id.tvForgPass)
+    public void openForgPassActivity(View view) {
+        hideSoftKeyboard(LoginActivity.this);
+        changeFocus(getFocusThief());
+        Intent intent = new Intent(LoginActivity.this, ForgPassActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.tvRegister)

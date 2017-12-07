@@ -20,4 +20,7 @@ public class WebServiceResponse {
     public boolean getRegistrationSuccessful() {
         return success;
     }
+    public boolean getResetPasswordSuccessful() {
+        return success;
+    }
 }

@@ -21,13 +21,21 @@ public class WebServiceCaller {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<WebServiceResponse> call = null;
 
-        if(type.equals("login")) {
-            User user = (User) data;
-            call = apiService.getLoginUserInfo(user.getUserName(), user.getPassword());
-        }
-        else if(type.equals("registration")) {
-            User user = (User) data;
-            call = apiService.getRegisterUserInfo(user);
+        switch(type) {
+            case "login": {
+                User user = (User) data;
+                call = apiService.getLoginUserInfo(user.getUserName(), user.getPassword());
+                break;
+            }
+            case "registration": {
+                User user = (User) data;
+                call = apiService.getRegisterUserInfo(user);
+                break;
+            }
+            case "resetPassword": {
+                User user = (User) data;
+                call = apiService.getResetPasswordInfo(user.getEmail());
+            }
         }
 
         if(call != null) {
@@ -35,11 +43,19 @@ public class WebServiceCaller {
                 @Override
                 public void onResponse(Call<WebServiceResponse> call, Response<WebServiceResponse> response) {
                     try {
-                        if(type.equals("login")) {
-                            handleLogin(response, context);
-                        }
-                        else if(type.equals("registration")) {
-                            handleRegistration(response, context);
+                        switch(type) {
+                            case "login": {
+                                handleLogin(response, context);
+                                break;
+                            }
+                            case "registration": {
+                                handleRegistration(response, context);
+                                break;
+                            }
+                            case "resetPassword": {
+                                handleResetPassword(response, context);
+                                break;
+                            }
                         }
                     }
                     catch(Exception ex) {
@@ -70,6 +86,15 @@ public class WebServiceCaller {
         String message = context.getString(R.string.toast_registration_fail);
         if(result) {
             message = context.getString(R.string.toast_registration_success);
+        }
+        Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void handleResetPassword(Response<WebServiceResponse> response, Context context) {
+        boolean result = response.body().getResetPasswordSuccessful();
+        String message = context.getString(R.string.toast_forg_pass_fail);
+        if(result) {
+            message = context.getString(R.string.toast_forg_pass_success);
         }
         Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }

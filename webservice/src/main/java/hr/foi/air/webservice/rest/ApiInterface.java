@@ -16,6 +16,9 @@ public interface ApiInterface {
     @GET("login")
     Call<WebServiceResponse> getLoginUserInfo(@Query("username") String username, @Query("password") String password);
 
+    @GET("resetPassword")
+    Call<WebServiceResponse> getResetPasswordInfo(@Query("email") String email);
+
     @POST("register")
     Call<WebServiceResponse> getRegisterUserInfo(@Body User user);
 }

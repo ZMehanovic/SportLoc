@@ -21,6 +21,14 @@ public class User {
         return password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setLoginData(String userName, String password) {
         this.userName = userName;
         this.password = password;

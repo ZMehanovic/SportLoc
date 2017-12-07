@@ -10,9 +10,12 @@
     <string name="btn_male">Muško</string>
     <string name="btn_pronadi">PRONAĐI</string>
     <string name="btn_registration">REGISTRACIJA</string>
+    <string name="btn_send">POŠALJI</string>
+    <string name="toast_empty_email">Polje za unos e-mail adrese ne smije biti prazno!</string>
     <string name="toast_empty_registration">Sva polja za registraciju moraju biti popunjena!</string>
     <string name="toast_empty_user_pass">Polja za unos korisničkog imena i lozinke ne smiju biti prazna!</string>
     <string name="tv_forg_pass">Zaboravljena lozinka?</string>
+    <string name="tv_forg_pass_info">Unesite vašu e-mail adresu kako bismo vam poslali novu lozinku:</string>
     <string name="tv_gender">Spol</string>
     <string name="tv_login">PRIJAVA:</string>
     <string name="tv_register">Registrirajte se</string>
