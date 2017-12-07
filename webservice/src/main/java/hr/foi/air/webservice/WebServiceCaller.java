@@ -3,7 +3,7 @@ package hr.foi.air.webservice;
 import android.content.Context;
 import android.widget.Toast;
 
-import hr.foi.air.data.User;
+import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.webservice.response.WebServiceResponse;
 import hr.foi.air.webservice.rest.ApiClient;
 import hr.foi.air.webservice.rest.ApiInterface;
@@ -23,18 +23,18 @@ public class WebServiceCaller {
 
         switch(type) {
             case "login": {
-                User user = (User) data;
-                call = apiService.getLoginUserInfo(user.getUserName(), user.getPassword());
+                UserBean userBean = (UserBean) data;
+                call = apiService.getLoginUserInfo(userBean.getUserName(), userBean.getPassword());
                 break;
             }
             case "registration": {
-                User user = (User) data;
-                call = apiService.getRegisterUserInfo(user);
+                UserBean userBean = (UserBean) data;
+                call = apiService.getRegisterUserInfo(userBean);
                 break;
             }
             case "resetPassword": {
-                User user = (User) data;
-                call = apiService.getResetPasswordInfo(user.getEmail());
+                UserBean userBean = (UserBean) data;
+                call = apiService.getResetPasswordInfo(userBean.getEmail());
             }
         }
 

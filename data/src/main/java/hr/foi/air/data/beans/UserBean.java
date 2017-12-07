@@ -1,10 +1,10 @@
-package hr.foi.air.data;
+package hr.foi.air.data.beans;
 
 /**
  * Created by Gabriel on 14.11.2017..
  */
 
-public class User {
+public class UserBean {
     private String firstName;
     private String lastName;
     private String userName;
@@ -12,6 +12,9 @@ public class User {
     private String gender;
     private String password;
     private String dob;
+
+    public UserBean() {
+    }
 
     public String getUserName() {
         return userName;

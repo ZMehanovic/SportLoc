@@ -1,6 +1,6 @@
 package hr.foi.air.webservice.rest;
 
-import hr.foi.air.data.User;
+import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.webservice.response.WebServiceResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +20,5 @@ public interface ApiInterface {
     Call<WebServiceResponse> getResetPasswordInfo(@Query("email") String email);
 
     @POST("register")
-    Call<WebServiceResponse> getRegisterUserInfo(@Body User user);
+    Call<WebServiceResponse> getRegisterUserInfo(@Body UserBean userBean);
 }
