@@ -59,8 +59,7 @@ public class LoginActivity extends UIHelperActivity {
         userBean.setLoginData(username, password);
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
-        webServiceCaller.CallWebService(userBean, type, getApplicationContext());
-        webServiceCaller.callWebService(user, type, getApplicationContext(), new WebServiceHandler() {
+        webServiceCaller.callWebService(userBean, type, getApplicationContext(), new WebServiceHandler() {
             @Override
             public void onDataArrived(Object result) {
                 boolean answer = (boolean) result;
