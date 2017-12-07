@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class WebServiceCaller {
 
-    public void CallWebService(Object data, final String type, final Context context) {
+    public void callWebService(Object data, final String type, final Context context, final WebServiceHandler callback) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<WebServiceResponse> call = null;
 
@@ -45,15 +45,15 @@ public class WebServiceCaller {
                     try {
                         switch(type) {
                             case "login": {
-                                handleLogin(response, context);
+                                callback.onDataArrived(response.body().getLoginSuccessful());
                                 break;
                             }
                             case "registration": {
-                                handleRegistration(response, context);
+                                callback.onDataArrived(response.body().getRegistrationSuccessful());
                                 break;
                             }
                             case "resetPassword": {
-                                handleResetPassword(response, context);
+                                callback.onDataArrived(response.body().getResetPasswordSuccessful());
                                 break;
                             }
                         }
@@ -70,32 +70,5 @@ public class WebServiceCaller {
                 }
             });
         }
-    }
-
-    private void handleLogin(Response<WebServiceResponse> response, Context context) {
-        boolean result = response.body().getLoginSuccessful();
-        String message = context.getString(R.string.toast_login_fail);
-        if(result) {
-            message = context.getString(R.string.toast_login_success);
-        }
-        Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-    }
-
-    private void handleRegistration(Response<WebServiceResponse> response, Context context) {
-        boolean result = response.body().getRegistrationSuccessful();
-        String message = context.getString(R.string.toast_registration_fail);
-        if(result) {
-            message = context.getString(R.string.toast_registration_success);
-        }
-        Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-    }
-
-    private void handleResetPassword(Response<WebServiceResponse> response, Context context) {
-        boolean result = response.body().getResetPasswordSuccessful();
-        String message = context.getString(R.string.toast_forg_pass_fail);
-        if(result) {
-            message = context.getString(R.string.toast_forg_pass_success);
-        }
-        Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }

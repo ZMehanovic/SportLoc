@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import butterknife.OnClick;
 import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.sportloc.helper.UIHelperActivity;
 import hr.foi.air.webservice.WebServiceCaller;
+import hr.foi.air.webservice.WebServiceHandler;
 
 public class RegistrationActivity extends UIHelperActivity {
     @BindView(R.id.txtName)
@@ -110,6 +112,16 @@ public class RegistrationActivity extends UIHelperActivity {
         userBean.setRegistrationData(name.trim(), surname.trim(), username.trim(), email.trim(), genderSelected, password, birthday.trim());
 
         WebServiceCaller webServiceCaller = new WebServiceCaller();
-        webServiceCaller.CallWebService(userBean, type, getApplicationContext());
+        webServiceCaller.callWebService(userBean, type, getApplicationContext(), new WebServiceHandler() {
+            @Override
+            public void onDataArrived(Object result) {
+                boolean answer = (boolean) result;
+                String message = getString(R.string.toast_registration_fail);
+                if(answer) {
+                    message = getString(R.string.toast_registration_success);
+                }
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
