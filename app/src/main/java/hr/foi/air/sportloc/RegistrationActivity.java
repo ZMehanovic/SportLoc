@@ -1,5 +1,6 @@
 package hr.foi.air.sportloc;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,7 @@ public class RegistrationActivity extends UIHelperActivity {
     View layout;
 
     private String genderSelected;
+    public static final String EXTRA_MESSAGE = "hr.foi.air.sportloc.REGISTRATION_SUCCESSFUL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +121,13 @@ public class RegistrationActivity extends UIHelperActivity {
                 String message = getString(R.string.toast_registration_fail);
                 if(answer) {
                     message = getString(R.string.toast_registration_success);
+                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
                 }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -30,6 +30,8 @@ public class LoginActivity extends UIHelperActivity {
     @BindView(R.id.layout)
     View layout;
 
+    public static final String EXTRA_MESSAGE = "hr.foi.air.sportloc.LOGIN_SUCCESSFUL";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +41,22 @@ public class LoginActivity extends UIHelperActivity {
         }
         ButterKnife.bind(this);
         setupUI(layout, excludedViews, LoginActivity.this);
+
+        Intent intent = getIntent();
+        String registrationMessage = intent.getStringExtra(RegistrationActivity.EXTRA_MESSAGE);
+        String forgottenPassMessage = intent.getStringExtra(ForgottenPassActivity.EXTRA_MESSAGE);
+        if(registrationMessage != null && !registrationMessage.isEmpty()) {
+            Toast.makeText(getApplicationContext(), registrationMessage, Toast.LENGTH_LONG).show();
+        }
+        else if(forgottenPassMessage != null && !forgottenPassMessage.isEmpty()) {
+            Toast.makeText(getApplicationContext(), forgottenPassMessage, Toast.LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.btnLogin)
     public void loginUserListener(View view) {
         hideSoftKeyboard(LoginActivity.this);
-        changeFocus(null , true);
+        changeFocus(null, true);
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String errorMsg = getString(R.string.toast_empty_user_pass);
@@ -66,8 +78,13 @@ public class LoginActivity extends UIHelperActivity {
                 String message = getString(R.string.toast_login_fail);
                 if(answer) {
                     message = getString(R.string.toast_login_success);
+                    Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
                 }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

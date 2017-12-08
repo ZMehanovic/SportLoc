@@ -1,5 +1,6 @@
 package hr.foi.air.sportloc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ public class ForgottenPassActivity extends UIHelperActivity {
 
     @BindView(R.id.layout)
     View layout;
+
+    public static final String EXTRA_MESSAGE = "hr.foi.air.sportloc.FORGOTTEN_PASS_SUCCESSFUL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,13 @@ public class ForgottenPassActivity extends UIHelperActivity {
                 String message = getString(R.string.toast_forg_pass_fail);
                 if(answer) {
                     message = getString(R.string.toast_forg_pass_success);
+                    Intent intent = new Intent(ForgottenPassActivity.this, LoginActivity.class);
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
                 }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
