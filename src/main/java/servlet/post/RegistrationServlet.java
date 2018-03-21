@@ -1,4 +1,4 @@
-package servlet;
+package servlet.post;
 
 import java.io.IOException;
 
@@ -25,7 +25,8 @@ public class RegistrationServlet extends HttpServletHelper {
 			throws ServletException, IOException {
 		Gson gson = new Gson();
 		JSONObject result = new JSONObject();
-		result.put("success", (new UserModel()).registerUser(gson.fromJson(getBody(request), UserBean.class)));
+    result.put("success", (new UserModel())
+        .registerUser(gson.fromJson(getBody(request), UserBean.class)));
 
 		showResponse(response, result);
 	}

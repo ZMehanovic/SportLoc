@@ -5,7 +5,7 @@
 		Current options: 
 		<br />-login -Requires: params(username, password)  -Returns success(boolean)
 		<br />-register -Requires: json(UserBean) -Returns success(boolean)
-		<br />-resetPassword -Requires: params(email) -Returns message(String)
+		<br />-resetPassword -Requires: params(email) -Returns success(boolean)
 		<br />-eventSettings -Requires: json(EventBean-needs to contain option(create,delete,update)) -Returns success(boolean)
 		<br />-getSports -Returns list(id, title)
 		<br />-getCities -Returns list(id, title)

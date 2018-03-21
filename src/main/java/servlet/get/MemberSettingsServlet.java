@@ -1,4 +1,4 @@
-package servlet;
+package servlet.get;
 
 import java.io.IOException;
 
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import helper.HttpServletHelper;
-import model.UserModel;
+import model.EventModel;
 
-@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServletHelper {
+@WebServlet(name = "MemberSettingsServlet", urlPatterns = { "/memberSettings" })
+public class MemberSettingsServlet extends HttpServletHelper {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject result = new JSONObject();
-		UserModel user = new UserModel();
-
-		result.put("success", user.checkLoginData(request.getParameterMap()));
+		EventModel event = new EventModel();
+		
+		result.put("success",event.updateEventMember(request.getParameterMap()));
 
 		showResponse(response, result);
 	}

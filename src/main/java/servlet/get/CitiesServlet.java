@@ -1,4 +1,4 @@
-package servlet;
+package servlet.get;
 
 import java.io.IOException;
 
@@ -12,16 +12,16 @@ import com.google.gson.Gson;
 import helper.HttpServletHelper;
 import model.EventModel;
 
-@WebServlet(name = "EventListServlet", urlPatterns = { "/getEvents" })
-public class EventListServlet extends HttpServletHelper {
+@WebServlet(name = "CitiesServlet", urlPatterns = { "/getCities" })
+public class CitiesServlet extends HttpServletHelper {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Gson gson = new Gson();
-		String result =  gson.toJson(new EventModel().getEventsList());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EventModel event = new EventModel();
+		String result = new Gson().toJson(event.getLocationsList());
+
 		showResponse(response, result);
 	}
 

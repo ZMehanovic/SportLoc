@@ -5,39 +5,39 @@
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>servlet.LoginServlet</servlet-class>
+		<servlet-class>servlet.get.LoginServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>RegistrationServlet</servlet-name>
-		<servlet-class>servlet.RegistrationServlet</servlet-class>
+		<servlet-class>servlet.post.RegistrationServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ResetPasswordServlet</servlet-name>
-		<servlet-class>servlet.ResetPasswordServlet</servlet-class>
+		<servlet-class>servlet.get.ResetPasswordServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>EventOptionsServlet</servlet-name>
-		<servlet-class>servlet.EventOptionsServlet</servlet-class>
+		<servlet-class>servlet.post.EventOptionsServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>SportServlet</servlet-name>
-		<servlet-class>servlet.SportServlet</servlet-class>
+		<servlet-class>servlet.get.SportServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>CitiesServlet</servlet-name>
-		<servlet-class>servlet.CitiesServlet</servlet-class>
+		<servlet-class>servlet.get.CitiesServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>EventListServlet</servlet-name>
-		<servlet-class>servlet.EventListServlet</servlet-class>
+		<servlet-class>servlet.get.EventListServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>MemberSettingsServlet</servlet-name>
-		<servlet-class>servlet.MemberSettingsServlet</servlet-class>
+		<servlet-class>servlet.get.MemberSettingsServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>EventMembersServlet</servlet-name>
-		<servlet-class>servlet.EventMembersServlet</servlet-class>
+		<servlet-class>servlet.get.EventMembersServlet</servlet-class>
 	</servlet>
 
 

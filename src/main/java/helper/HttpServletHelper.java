@@ -10,23 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HttpServletHelper extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public String getBody(HttpServletRequest request) throws IOException {
-		return request.getReader().lines().collect(Collectors.joining(""));
-	}
+  public String getBody(HttpServletRequest request) throws IOException {
+    return request.getReader().lines().collect(Collectors.joining(""));
+  }
 
-	public void showResponse(HttpServletResponse response, Object jsonToShow) {
+  public void showResponse(HttpServletResponse response, Object jsonToShow) {
 
-		try {
-			response.setContentType("application/json");
-			ServletOutputStream out = response.getOutputStream();
+    try {
+      response.setContentType("application/json");
+      ServletOutputStream out = response.getOutputStream();
 
-			out.write(jsonToShow.toString().getBytes());
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+      out.write(jsonToShow.toString().getBytes());
+      out.flush();
+      out.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 }

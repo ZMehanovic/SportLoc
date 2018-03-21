@@ -8,12 +8,19 @@ import java.util.Map;
 
 import beans.EventBean;
 import beans.EventMemberBean;
-import database.DbManager;
+import dao.DAOFactory;
 import helper.EventOptions;
 
 public class EventModel {
 	
-	/**
+  private DAOFactory daoFactory;
+  
+  
+  
+	public EventModel() {
+    this.daoFactory = new DAOFactory();
+  }
+  /**
 	 * Creates a new event based on data provided
 	 * 
 	 * @param eventBean
@@ -45,7 +52,7 @@ public class EventModel {
 	 * @return boolean, true if successful
 	 */
 	private boolean deleteEvent(Integer eventId) {
-		boolean result = new DbManager().deleteEvent(eventId);
+		boolean result = daoFactory.getEventDao().deleteEvent(eventId);
 		
 		return result;
 	}
@@ -59,7 +66,7 @@ public class EventModel {
 	 */
 	private boolean createUpdateEvent(EventBean eventBean) {
 		// TODO check values in bean.
-		boolean result = new DbManager().upsertEvent(eventBean);
+		boolean result = daoFactory.getEventDao().upsertEvent(eventBean);
 
 		return result;
 	}
@@ -69,8 +76,8 @@ public class EventModel {
 	 * 
 	 * @return List of available cities (id, title)
 	 */
-	public ArrayList<HashMap<String, Object>> getCitiesList() {
-		ResultSet data = new DbManager().getCities();
+	public ArrayList<HashMap<String, Object>> getLocationsList() {
+		ResultSet data = daoFactory.getEventDao().getLocations();
 		ArrayList<HashMap<String, Object>> result = getResultList(data);
 		// JSONArray array=JSONArray.
 		return result;
@@ -82,7 +89,7 @@ public class EventModel {
 	 * @return List of available sports (id, title)
 	 */
 	public ArrayList<HashMap<String, Object>> getSportsList() {
-		ResultSet data = new DbManager().getSports();
+		ResultSet data = daoFactory.getEventDao().getSports();
 		ArrayList<HashMap<String, Object>> result = getResultList(data);
 
 		return result;
@@ -121,7 +128,7 @@ public class EventModel {
 	 */
 	public ArrayList<EventBean> getEventsList() {
 		ArrayList<EventBean> result = new ArrayList<EventBean>();
-		ResultSet resultSet = new DbManager().getEvents();
+		ResultSet resultSet = daoFactory.getEventDao().getEvents();
 		if (resultSet != null) {
 			try {
 				while (resultSet.next()) {
@@ -173,7 +180,7 @@ public class EventModel {
 			result = true;
 		}
 		if (result) {
-			result = new DbManager().upsertEventMembers(email, status, eventId);
+			result = daoFactory.getEventDao().upsertEventMembers(email, status, eventId);
 
 		}
 
@@ -194,7 +201,7 @@ public class EventModel {
 			return null;
 		}
 		ArrayList<EventMemberBean> result = new ArrayList<EventMemberBean>();
-		ResultSet resultSet=new DbManager().getEventMembers(eventId);
+    ResultSet resultSet = daoFactory.getEventDao().getEventMembers(eventId);
 
 		if (resultSet != null) {
 			try {
@@ -210,9 +217,9 @@ public class EventModel {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
-		
+
 	}
 
 }
