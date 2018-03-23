@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hr.foi.air.sportloc.adapters.EventListAdapter;
 
 public class EventListActivity extends AppCompatActivity {
     @BindView(R.id.rcvEventList)
@@ -19,8 +22,14 @@ public class EventListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        ArrayList<String> eventList = new ArrayList<>();
+        eventList.add("Test 1");
+        eventList.add("Test 2");
+        eventList.add("Test 3");
+
+        RecyclerView.Adapter mAdapter = new EventListAdapter(eventList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
