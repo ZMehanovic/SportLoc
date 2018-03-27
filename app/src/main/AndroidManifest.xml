@@ -22,7 +22,8 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".StartActivity" />
         <activity android:name=".ForgottenPassActivity" />
-        <activity android:name=".EventListActivity"></activity>
+        <activity android:name=".EventListActivity" />
+        <activity android:name=".EventDetailsActivity"></activity>
     </application>
 
 </manifest>
