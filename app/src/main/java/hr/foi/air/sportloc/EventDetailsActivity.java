@@ -8,8 +8,6 @@ import butterknife.ButterKnife;
 
 public class EventDetailsActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
