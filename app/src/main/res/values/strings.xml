@@ -42,4 +42,6 @@
     <string name="txt_password">Lozinka</string>
     <string name="txt_surname">Prezime</string>
     <string name="txt_username">Korisničko ime</string>
+    <string name="title_activity_event_details">Informacije</string>
+
 </resources>
