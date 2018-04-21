@@ -1,6 +1,7 @@
 package helper;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletOutputStream;
@@ -13,6 +14,7 @@ public class HttpServletHelper extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   public String getBody(HttpServletRequest request) throws IOException {
+    request.setCharacterEncoding(StandardCharsets.UTF_8.name());
     return request.getReader().lines().collect(Collectors.joining(""));
   }
 
