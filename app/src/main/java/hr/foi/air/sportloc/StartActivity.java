@@ -9,6 +9,10 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+//delete
+import hr.foi.air.data.beans.BeanTypes;
+import hr.foi.air.data.beans.EventBean;
+
 public class StartActivity extends AppCompatActivity {
 
     @Override

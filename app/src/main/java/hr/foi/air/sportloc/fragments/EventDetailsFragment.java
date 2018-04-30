@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -37,38 +36,38 @@ import hr.foi.air.sportloc.databinding.FragmentEventDetailsBinding;
 public class EventDetailsFragment extends Fragment implements OnMapReadyCallback {
 
     Unbinder unbinder;
-    @BindView(R.id.etTitle)
-    EditText etTitle;
-    @BindView(R.id.etLocation)
-    EditText etLocation;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.tvSportLocation)
+    TextView tvSportLocation;
     @BindView(R.id.dvdHorizontal)
     View dvdHorizontal;
-    @BindView(R.id.tvSpace)
-    TextView tvSpace;
-    @BindView(R.id.tvCreatorLabel)
-    TextView tvCreatorLabel;
-    @BindView(R.id.tvCreator)
-    TextView tvCreator;
-    @BindView(R.id.tvAddressLabel)
-    TextView tvAddressLabel;
-    @BindView(R.id.etAddress)
-    EditText etAddress;
-    @BindView(R.id.tvDateLabel)
-    TextView tvDateLabel;
-    @BindView(R.id.etDate)
-    EditText etDate;
-    @BindView(R.id.tvTimeLabel)
-    TextView tvTimeLabel;
-    @BindView(R.id.etTime)
-    EditText etTime;
-    @BindView(R.id.tvDescriptionLabel)
-    TextView tvDescriptionLabel;
-    @BindView(R.id.etDescription)
-    EditText etDescription;
+    @BindView(R.id.tvCapacity)
+    TextView tvCapacity;
+    @BindView(R.id.lblCreator)
+    TextView lblCreator;
+    @BindView(R.id.tvCreatorUserName)
+    TextView tvCreatorUserName;
+    @BindView(R.id.lblAddress)
+    TextView lblAddress;
+    @BindView(R.id.tvAddress)
+    TextView tvAddress;
+    @BindView(R.id.lblStartTime)
+    TextView lblStartTime;
+    @BindView(R.id.tvStartTime)
+    TextView tvStartTime;
+    @BindView(R.id.lblEndTime)
+    TextView lblEndTime;
+    @BindView(R.id.tvEndTime)
+    TextView tvEndTime;
+    @BindView(R.id.lblDescription)
+    TextView lblDescription;
+    @BindView(R.id.tvDescription)
+    TextView tvDescription;
     @BindView(R.id.btnJoinLeaveRequest)
     Button btnJoinLeaveRequest;
-    @BindView(R.id.tvMapLabel)
-    TextView tvMapLabel;
+    @BindView(R.id.lblMap)
+    TextView lblMap;
     @BindView(R.id.ivEventDetailsTick)
     ImageView ivEventDetailsTick;
     @BindView(R.id.scrollView)
@@ -78,7 +77,6 @@ public class EventDetailsFragment extends Fragment implements OnMapReadyCallback
 
     public EventDetailsFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
