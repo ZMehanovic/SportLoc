@@ -21,4 +21,5 @@ public interface ApiInterface {
 
     @POST("register")
     Call<WebServiceResponse> getRegisterUserInfo(@Body UserBean userBean);
+
 }
