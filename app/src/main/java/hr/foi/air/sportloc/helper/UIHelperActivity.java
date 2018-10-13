@@ -39,7 +39,7 @@ public class UIHelperActivity extends AppCompatActivity {
     public static void changeFocus(View view, boolean focus) {
         if (view == null && focusThief != null) {
             view = focusThief;
-        } else if(view == null){
+        } else {
             return;
         }
         view.setFocusable(focus);

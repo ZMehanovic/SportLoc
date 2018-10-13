@@ -8,27 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="EditTextDisabled" parent="AppTheme">
-        <item name="android:clickable">false</item>
-        <item name="android:cursorVisible">false</item>
-        <item name="android:focusable">false</item>
-        <item name="android:focusableInTouchMode">false</item>
-    </style>
-
-    <style name="BoldText" parent="AppTheme">
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="MarginsLeftRight" parent="AppTheme">
-        <item name="android:layout_marginStart">16dp</item>
-        <item name="android:layout_marginEnd">16dp</item>
-    </style>
-
-    <style name="HorizontalLine" parent="AppTheme">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">2dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:background">#888888</item>
-    </style>
-
 </resources>

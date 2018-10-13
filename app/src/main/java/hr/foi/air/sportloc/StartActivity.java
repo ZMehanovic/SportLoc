@@ -3,15 +3,7 @@ package hr.foi.air.sportloc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-//delete
-import hr.foi.air.data.beans.BeanTypes;
-import hr.foi.air.data.beans.EventBean;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -22,7 +14,6 @@ public class StartActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
@@ -30,11 +21,4 @@ public class StartActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
     }
-
-    @OnClick(R.id.btnFind)
-    public void openEventListActivity(View view) {
-        Intent intent = new Intent(StartActivity.this, EventListActivity.class);
-        startActivity(intent);
-    }
-
 }
