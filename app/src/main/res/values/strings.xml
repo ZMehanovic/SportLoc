@@ -25,7 +25,7 @@
     <string name="event_details_map">Prikaz na karti</string>
     <string name="event_details_time">Vrijeme:</string>
 
-    <string name="ikona_kvacica">Kvačica</string>
+    <string name="icon_tick">Kvačica</string>
 
     <string name="title_activity_event_details">Informacije</string>
     <string name="title_activity_event_members">Sudionici</string>

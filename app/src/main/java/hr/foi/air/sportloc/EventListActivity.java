@@ -9,9 +9,14 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hr.foi.air.data.beans.EventBean;
 import hr.foi.air.sportloc.adapters.EventListAdapter;
+import hr.foi.air.webservice.WebServiceCaller;
+import hr.foi.air.webservice.WebServiceHandler;
 
 public class EventListActivity extends AppCompatActivity {
+    private RecyclerView.Adapter mAdapter;
+
     @BindView(R.id.rcvEventList)
     RecyclerView mRecyclerView;
 
@@ -24,12 +29,26 @@ public class EventListActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> eventList = new ArrayList<>();
-        eventList.add("Test 1");
-        eventList.add("Test 2");
-        eventList.add("Test 3");
+        retrieveEvents();
+    }
 
-        RecyclerView.Adapter mAdapter = new EventListAdapter(eventList);
-        mRecyclerView.setAdapter(mAdapter);
+    public void retrieveEvents() {
+        String type = "getEventList";
+
+        WebServiceCaller webServiceCaller = new WebServiceCaller();
+        webServiceCaller.callWebService(null, type, getApplicationContext(), new WebServiceHandler() {
+            @Override
+            public void onDataArrived(Object result) {
+                ArrayList<?> resultList = (ArrayList<?>) result;
+                ArrayList<EventBean> eventList = new ArrayList<>();
+                for(Object event : resultList) {
+                    if(event instanceof EventBean) {
+                        eventList.add((EventBean) event);
+                    }
+                }
+                mAdapter = new EventListAdapter(eventList);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        });
     }
 }

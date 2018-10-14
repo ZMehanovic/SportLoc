@@ -2,6 +2,10 @@ package hr.foi.air.webservice.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
+import hr.foi.air.data.beans.EventBean;
+
 /**
  * Created by Gabriel on 30.11.2017..
  */

@@ -268,7 +268,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="4dp"
-                    android:contentDescription="@string/ikona_kvacica"
+                    android:contentDescription="@string/icon_tick"
                     android:scaleType="fitStart"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/dvdHorizontal"

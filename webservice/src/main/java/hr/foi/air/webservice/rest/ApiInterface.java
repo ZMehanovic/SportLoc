@@ -1,5 +1,8 @@
 package hr.foi.air.webservice.rest;
 
+import java.util.ArrayList;
+
+import hr.foi.air.data.beans.EventBean;
 import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.webservice.response.WebServiceResponse;
 import retrofit2.Call;
@@ -18,6 +21,9 @@ public interface ApiInterface {
 
     @GET("resetPassword")
     Call<WebServiceResponse> getResetPasswordInfo(@Query("email") String email);
+
+    @GET("getEvents")
+    Call<ArrayList<EventBean>> getEventListInfo();
 
     @POST("register")
     Call<WebServiceResponse> getRegisterUserInfo(@Body UserBean userBean);

@@ -3,6 +3,9 @@ package hr.foi.air.webservice;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import hr.foi.air.data.beans.EventBean;
 import hr.foi.air.data.beans.UserBean;
 import hr.foi.air.webservice.response.WebServiceResponse;
 import hr.foi.air.webservice.rest.ApiClient;
@@ -20,6 +23,8 @@ public class WebServiceCaller {
     public void callWebService(Object data, final String type, final Context context, final WebServiceHandler callback) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<WebServiceResponse> call = null;
+        Call<ArrayList<EventBean>> callEvents = null;
+        final String errorMessage = context.getString(R.string.toast_error);
 
         switch(type) {
             case "login": {
@@ -35,6 +40,11 @@ public class WebServiceCaller {
             case "resetPassword": {
                 UserBean userBean = (UserBean) data;
                 call = apiService.getResetPasswordInfo(userBean.getEmail());
+                break;
+            }
+            case "getEventList": {
+                callEvents = apiService.getEventListInfo();
+                break;
             }
         }
 
@@ -65,8 +75,31 @@ public class WebServiceCaller {
 
                 @Override
                 public void onFailure(Call<WebServiceResponse> call, Throwable t) {
-                    String message = context.getString(R.string.toast_error);
-                    Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        if(callEvents != null) {
+            callEvents.enqueue(new Callback<ArrayList<EventBean>>() {
+                @Override
+                public void onResponse(Call<ArrayList<EventBean>> call, Response<ArrayList<EventBean>> response) {
+                    try {
+                        switch(type) {
+                            case "getEventList": {
+                                callback.onDataArrived(response.body());
+                                break;
+                            }
+                        }
+                    }
+                    catch(Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<EventBean>> call, Throwable t) {
+                    Toast.makeText(context.getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
                 }
             });
         }
